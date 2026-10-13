@@ -1,0 +1,541 @@
+jurisdiction,type,population,publisher,code_url,acquisition_route
+Los Angeles County,county,9757179,civicplus:municode,https://library.municode.com/ca/los_angeles_county,publisher-license-or-cpra
+Los Angeles,city,3878704,icc:american-legal,https://codelibrary.amlegal.com/codes/los_angeles/latest/overview,publisher-license-or-cpra
+San Diego County,county,3298799,icc:american-legal,https://codelibrary.amlegal.com/codes/san_diego/latest/overview,publisher-license-or-cpra
+Orange County,county,3170435,civicplus:municode,https://library.municode.com/ca/orange_county,publisher-license-or-cpra
+Riverside County,county,2529933,civicplus:municode,https://library.municode.com/ca/riverside_county,publisher-license-or-cpra
+San Bernardino County,county,2214281,icc:american-legal,https://codelibrary.amlegal.com/codes/sanbernardino/latest/overview,publisher-license-or-cpra
+Santa Clara County,county,1926325,civicplus:municode,https://library.municode.com/ca/santa_clara_county,publisher-license-or-cpra
+Alameda County,county,1649060,civicplus:municode,https://library.municode.com/ca/alameda_county,publisher-license-or-cpra
+Sacramento County,county,1611231,icc:ecode360,https://ecode360.com/SA4999,publisher-license-or-cpra
+San Diego,city,1404452,self-published:sandiego.gov,https://www.sandiego.gov/city-clerk/officialdocs/municipal-code,ingested:ok/california/municipal/san-diego
+Contra Costa County,county,1172607,civicplus:municode,https://library.municode.com/ca/contra_costa_county,publisher-license-or-cpra
+Fresno County,county,1024125,civicplus:municode,https://library.municode.com/ca/fresno_county,publisher-license-or-cpra
+San Jose,city,997368,civicplus:municode,https://library.municode.com/ca/san_jose,publisher-license-or-cpra
+Kern County,county,922529,civicplus:municode,https://library.municode.com/ca/kern_county,publisher-license-or-cpra
+Ventura County,county,835427,civicplus:municode,https://library.municode.com/ca/ventura_county,publisher-license-or-cpra
+San Francisco,city,827526,icc:american-legal,https://codelibrary.amlegal.com/codes/san_francisco/latest/overview,publisher-license-or-cpra
+San Francisco County,county,827526,icc:american-legal,https://codelibrary.amlegal.com/codes/san_francisco/latest/overview,publisher-license-or-cpra
+San Joaquin County,county,816108,icc:american-legal;civicplus:municode,https://codelibrary.amlegal.com/codes/sanjoaquin/latest/overview;https://library.municode.com/ca/san_joaquin_county,publisher-license-or-cpra
+San Mateo County,county,742893,civicplus:municode,https://library.municode.com/ca/san_mateo_county,publisher-license-or-cpra
+Stanislaus County,county,556972,icc:ecode360,https://ecode360.com/ST5017,publisher-license-or-cpra
+Fresno,city,550105,civicplus:municode,https://library.municode.com/ca/fresno,publisher-license-or-cpra
+Sacramento,city,535798,icc:american-legal,https://codelibrary.amlegal.com/codes/sacramentoca/latest/overview,publisher-license-or-cpra
+Sonoma County,county,485375,civicplus:municode,https://library.municode.com/ca/sonoma_county,publisher-license-or-cpra
+Tulare County,county,483546,icc:ecode360,https://ecode360.com/TU4850,publisher-license-or-cpra
+Solano County,county,455101,none-found,,check-city-site-or-cpra
+Long Beach,city,450901,civicplus:municode,https://library.municode.com/ca/long_beach,publisher-license-or-cpra
+Santa Barbara County,county,444500,civicplus:municode,https://library.municode.com/ca/santa_barbara_county,publisher-license-or-cpra
+Oakland,city,443554,civicplus:municode,https://library.municode.com/ca/oakland,publisher-license-or-cpra
+Monterey County,county,436251,civicplus:municode,https://library.municode.com/ca/monterey_county,publisher-license-or-cpra
+Placer County,county,433822,icc:ecode360,https://ecode360.com/PL4987,publisher-license-or-cpra
+Bakersfield,city,417468,none-found,,check-city-site-or-cpra
+Anaheim,city,344561,icc:american-legal,https://codelibrary.amlegal.com/codes/anaheim/latest/overview,publisher-license-or-cpra
+Stockton,city,324975,icc:ecode360,https://ecode360.com/ST5019,publisher-license-or-cpra
+Riverside,city,323757,civicplus:municode,https://library.municode.com/ca/riverside,publisher-license-or-cpra
+Irvine,city,318683,civicplus:municode,https://library.municode.com/ca/irvine,publisher-license-or-cpra
+Santa Ana,city,316184,civicplus:municode,https://library.municode.com/ca/santa_ana,publisher-license-or-cpra
+Merced County,county,296774,icc:ecode360,https://ecode360.com/ME4967,publisher-license-or-cpra
+San Luis Obispo County,county,281843,civicplus:municode,https://library.municode.com/ca/san_luis_obispo_county,publisher-license-or-cpra
+Chula Vista,city,278546,none-found,,check-city-site-or-cpra
+Santa Cruz County,county,262406,icc:ecode360,https://ecode360.com/SA4770,publisher-license-or-cpra
+Marin County,county,256400,civicplus:municode,https://library.municode.com/ca/marin_county,publisher-license-or-cpra
+Santa Clarita,city,229159,icc:ecode360,https://ecode360.com/SA4627,publisher-license-or-cpra
+Fremont,city,228192,icc:code-publishing,https://www.codepublishing.com/CA/Fremont/,publisher-license-or-cpra
+Yolo County,county,225251,icc:american-legal,https://codelibrary.amlegal.com/codes/yolocounty/latest/overview,publisher-license-or-cpra
+San Bernardino,city,224775,icc:american-legal,https://codelibrary.amlegal.com/codes/sanbernardinoca/latest/overview,publisher-license-or-cpra
+Modesto,city,220592,civicplus:municode,https://library.municode.com/ca/modesto,publisher-license-or-cpra
+Fontana,city,218455,civicplus:municode,https://library.municode.com/ca/fontana,publisher-license-or-cpra
+Moreno Valley,city,213919,icc:ecode360,https://ecode360.com/MO4973,publisher-license-or-cpra
+Butte County,county,208334,civicplus:municode,https://library.municode.com/ca/butte_county,publisher-license-or-cpra
+Oxnard,city,200616,icc:american-legal,https://codelibrary.amlegal.com/codes/oxnard/latest/overview,publisher-license-or-cpra
+Huntington Beach,city,193151,icc:ecode360,https://ecode360.com/HU4937,publisher-license-or-cpra
+El Dorado County,county,192823,civicplus:municode,https://library.municode.com/ca/el_dorado_county,publisher-license-or-cpra
+Glendale,city,187823,icc:ecode360,https://ecode360.com/GL4929,publisher-license-or-cpra
+Ontario,city,185285,icc:american-legal,https://codelibrary.amlegal.com/codes/ontarioca/latest/overview,publisher-license-or-cpra
+Elk Grove,city,182797,icc:ecode360,https://ecode360.com/EL4423,publisher-license-or-cpra
+Imperial County,county,181724,civicplus:municode,https://library.municode.com/ca/imperial_county,publisher-license-or-cpra
+Shasta County,county,181121,civicplus:municode,https://library.municode.com/ca/shasta_county,publisher-license-or-cpra
+Santa Rosa,city,177524,icc:ecode360,https://ecode360.com/SA5009,publisher-license-or-cpra
+Rancho Cucamonga,city,176675,icc:ecode360,https://ecode360.com/RA4992,publisher-license-or-cpra
+Garden Grove,city,172361,icc:ecode360,https://ecode360.com/GA4928,publisher-license-or-cpra
+Oceanside,city,170941,civicplus:municode,https://library.municode.com/ca/oceanside,publisher-license-or-cpra
+Lancaster,city,167426,civicplus:municode,https://library.municode.com/ca/lancaster,publisher-license-or-cpra
+Madera County,county,165432,icc:american-legal;civicplus:municode,https://codelibrary.amlegal.com/codes/madera/latest/overview;https://library.municode.com/ca/madera_county,publisher-license-or-cpra
+Roseville,city,163304,icc:ecode360,https://ecode360.com/RO4998,publisher-license-or-cpra
+Palmdale,city,162536,icc:ecode360,https://ecode360.com/PA4578,publisher-license-or-cpra
+Corona,city,161540,icc:american-legal,https://codelibrary.amlegal.com/codes/corona/latest/overview,publisher-license-or-cpra
+Salinas,city,160783,civicplus:municode,https://library.municode.com/ca/salinas,publisher-license-or-cpra
+Hayward,city,158440,civicplus:municode,https://library.municode.com/ca/hayward,publisher-license-or-cpra
+Sunnyvale,city,156792,icc:ecode360,https://ecode360.com/SU5020,publisher-license-or-cpra
+Kings County,county,154913,civicplus:municode,https://library.municode.com/ca/kings_county,publisher-license-or-cpra
+Escondido,city,148847,icc:ecode360,https://ecode360.com/ES4926,publisher-license-or-cpra
+Pomona,city,147966,civicplus:municode,https://library.municode.com/ca/pomona,publisher-license-or-cpra
+Visalia,city,146271,icc:american-legal,https://codelibrary.amlegal.com/codes/visalia/latest/overview,publisher-license-or-cpra
+Victorville,city,140721,civicplus:municode,https://library.municode.com/ca/victorville,publisher-license-or-cpra
+Fullerton,city,140054,icc:american-legal,https://codelibrary.amlegal.com/codes/fullerton/latest/overview,publisher-license-or-cpra
+Torrance,city,139576,icc:code-publishing,https://www.codepublishing.com/CA/Torrance/,publisher-license-or-cpra
+Orange,city,137941,icc:ecode360,https://ecode360.com/OR5214,publisher-license-or-cpra
+Pasadena,city,137195,civicplus:municode,https://library.municode.com/ca/pasadena,publisher-license-or-cpra
+Santa Clara,city,133132,icc:ecode360,https://ecode360.com/SA4626,publisher-license-or-cpra
+Napa County,county,132727,civicplus:municode,https://library.municode.com/ca/napa_county,publisher-license-or-cpra
+Humboldt County,county,132380,none-found,,check-city-site-or-cpra
+Clovis,city,127993,icc:ecode360,https://ecode360.com/CL4388,publisher-license-or-cpra
+Simi Valley,city,125778,civicplus:municode,https://library.municode.com/ca/simi_valley,publisher-license-or-cpra
+Thousand Oaks,city,124229,icc:american-legal,https://codelibrary.amlegal.com/codes/thousandoaks/latest/overview,publisher-license-or-cpra
+Concord,city,124016,icc:code-publishing,https://www.codepublishing.com/CA/Concord/,publisher-license-or-cpra
+Vallejo,city,123475,civicplus:municode,https://library.municode.com/ca/vallejo,publisher-license-or-cpra
+Fairfield,city,122646,icc:ecode360,https://ecode360.com/FA4438,publisher-license-or-cpra
+Berkeley,city,121749,icc:code-publishing,https://www.codepublishing.com/CA/Berkeley/,publisher-license-or-cpra
+Antioch,city,118453,icc:american-legal,https://codelibrary.amlegal.com/codes/antioch/latest/overview,publisher-license-or-cpra
+Menifee,city,117041,icc:american-legal,https://codelibrary.amlegal.com/codes/menifee/latest/overview,publisher-license-or-cpra
+Richmond,city,115353,civicplus:municode,https://library.municode.com/ca/richmond,publisher-license-or-cpra
+Carlsbad,city,113575,icc:ecode360,https://ecode360.com/CA4913,publisher-license-or-cpra
+Murrieta,city,112539,icc:american-legal,https://codelibrary.amlegal.com/codes/murrieta/latest/overview,publisher-license-or-cpra
+Temecula,city,112431,icc:ecode360,https://ecode360.com/TE5022,publisher-license-or-cpra
+Santa Maria,city,111346,icc:ecode360,https://ecode360.com/SA5007,publisher-license-or-cpra
+San Buenaventura (Ventura),city,109831,none-found,,check-city-site-or-cpra
+Downey,city,109368,icc:ecode360,https://ecode360.com/DO4924,publisher-license-or-cpra
+Costa Mesa,city,109131,icc:ecode360,https://ecode360.com/CO4918,publisher-license-or-cpra
+Jurupa Valley,city,108154,civicplus:municode,https://library.municode.com/ca/jurupa_valley,publisher-license-or-cpra
+West Covina,city,106920,civicplus:municode,https://library.municode.com/ca/west_covina,publisher-license-or-cpra
+Rialto,city,104918,civicplus:municode,https://library.municode.com/ca/rialto,publisher-license-or-cpra
+El Monte,city,104639,civicplus:municode,https://library.municode.com/ca/el_monte,publisher-license-or-cpra
+Vacaville,city,103994,icc:ecode360,https://ecode360.com/VA4679,publisher-license-or-cpra
+Burbank,city,103533,icc:ecode360,https://ecode360.com/BU4369,publisher-license-or-cpra
+El Cajon,city,103291,icc:ecode360,https://ecode360.com/EL4925,publisher-license-or-cpra
+San Mateo,city,103006,none-found,,check-city-site-or-cpra
+Chico,city,102911,icc:american-legal,https://codelibrary.amlegal.com/codes/chico/latest/overview,publisher-license-or-cpra
+Inglewood,city,102774,icc:ecode360,https://ecode360.com/IN4942,publisher-license-or-cpra
+Nevada County,county,102195,civicplus:municode,https://library.municode.com/ca/nevada_county,publisher-license-or-cpra
+Hesperia,city,101836,civicplus:municode,https://library.municode.com/ca/hesperia,publisher-license-or-cpra
+Daly City,city,101418,none-found,,check-city-site-or-cpra
+Tracy,city,100136,civicplus:municode,https://library.municode.com/ca/tracy,publisher-license-or-cpra
+Vista,city,99322,none-found,,check-city-site-or-cpra
+Sutter County,county,98545,civicplus:municode,https://library.municode.com/ca/sutter_county,publisher-license-or-cpra
+Norwalk,city,98230,icc:ecode360,https://ecode360.com/NO4978,publisher-license-or-cpra
+San Marcos,city,96620,civicplus:municode,https://library.municode.com/ca/san_marcos,publisher-license-or-cpra
+Merced,city,96073,civicplus:municode,https://library.municode.com/ca/merced,publisher-license-or-cpra
+Manteca,city,94292,icc:ecode360,https://ecode360.com/MA4966,publisher-license-or-cpra
+Indio,city,94275,icc:ecode360,https://ecode360.com/IN6951,publisher-license-or-cpra
+Chino,city,94010,civicplus:municode,https://library.municode.com/ca/chino,publisher-license-or-cpra
+Redding,city,93502,civicplus:municode,https://library.municode.com/ca/redding,publisher-license-or-cpra
+Hemet,city,92912,civicplus:municode,https://library.municode.com/ca/hemet,publisher-license-or-cpra
+Mission Viejo,city,91601,civicplus:municode,https://library.municode.com/ca/mission_viejo,publisher-license-or-cpra
+Carson,city,91358,icc:ecode360,https://ecode360.com/CA4377,publisher-license-or-cpra
+Compton,city,91129,icc:ecode360,https://ecode360.com/CO4057,publisher-license-or-cpra
+South Gate,city,90805,icc:ecode360,https://ecode360.com/SO4650,publisher-license-or-cpra
+Santa Monica,city,90729,icc:ecode360,https://ecode360.com/SA5008,publisher-license-or-cpra
+Westminster,city,89537,icc:ecode360,https://ecode360.com/WE5033,publisher-license-or-cpra
+Mendocino County,county,89175,civicplus:municode,https://library.municode.com/ca/mendocino_county,publisher-license-or-cpra
+Folsom,city,88091,icc:ecode360,https://ecode360.com/FO4445,publisher-license-or-cpra
+Yuba County,county,87469,civicplus:municode,https://library.municode.com/ca/yuba_county,publisher-license-or-cpra
+Mountain View,city,87316,civicplus:municode,https://library.municode.com/ca/mountain_view,publisher-license-or-cpra
+Santa Barbara,city,87291,icc:ecode360,https://ecode360.com/SA5006,publisher-license-or-cpra
+Lake Forest,city,87159,icc:ecode360,https://ecode360.com/LA4954,publisher-license-or-cpra
+Citrus Heights,city,86909,civicplus:municode,https://library.municode.com/ca/citrus_heights,publisher-license-or-cpra
+San Leandro,city,86571,icc:ecode360,https://ecode360.com/SA5044,publisher-license-or-cpra
+San Ramon,city,85924,none-found,,check-city-site-or-cpra
+Whittier,city,85589,civicplus:municode,https://library.municode.com/ca/whittier,publisher-license-or-cpra
+Livermore,city,84867,icc:ecode360,https://ecode360.com/LI2656,publisher-license-or-cpra
+Rancho Cordova,city,84113,icc:ecode360,https://ecode360.com/RA4605,publisher-license-or-cpra
+Hawthorne,city,83633,icc:ecode360,https://ecode360.com/HA4935,publisher-license-or-cpra
+Perris,city,83032,civicplus:municode,https://library.municode.com/ca/perris,publisher-license-or-cpra
+Redwood City,city,82982,none-found,,check-city-site-or-cpra
+Newport Beach,city,82970,icc:ecode360,https://ecode360.com/NE4559,publisher-license-or-cpra
+Buena Park,city,82611,icc:ecode360,https://ecode360.com/BU4909,publisher-license-or-cpra
+Alhambra,city,80279,icc:american-legal,https://codelibrary.amlegal.com/codes/alhambra/latest/overview,publisher-license-or-cpra
+Milpitas,city,79746,civicplus:municode,https://library.municode.com/ca/milpitas,publisher-license-or-cpra
+Upland,city,79684,icc:ecode360,https://ecode360.com/UP5026,publisher-license-or-cpra
+Tustin,city,78863,civicplus:municode,https://library.municode.com/ca/tustin,publisher-license-or-cpra
+Alameda,city,78795,civicplus:municode,https://library.municode.com/ca/alameda,publisher-license-or-cpra
+Lakewood,city,78494,icc:ecode360,https://ecode360.com/LA6869,publisher-license-or-cpra
+Chino Hills,city,77418,civicplus:municode,https://library.municode.com/ca/chino_hills,publisher-license-or-cpra
+Pittsburg,city,77131,icc:ecode360,https://ecode360.com/PI4590,publisher-license-or-cpra
+Napa,city,76921,icc:ecode360,https://ecode360.com/NA4976,publisher-license-or-cpra
+Bellflower,city,75716,icc:ecode360,https://ecode360.com/BE4904,publisher-license-or-cpra
+Pleasanton,city,75664,icc:ecode360,https://ecode360.com/PL4988,publisher-license-or-cpra
+Rocklin,city,75129,civicplus:municode,https://library.municode.com/ca/rocklin,publisher-license-or-cpra
+Apple Valley,town,75029,civicplus:municode,https://library.municode.com/ca/apple_valley,publisher-license-or-cpra
+Redlands,city,74279,icc:american-legal,https://codelibrary.amlegal.com/codes/redlandsca/latest/overview,publisher-license-or-cpra
+Lake Elsinore,city,73595,icc:ecode360,https://ecode360.com/LA4506,publisher-license-or-cpra
+Turlock,city,72888,icc:ecode360,https://ecode360.com/TU4675,publisher-license-or-cpra
+Tulare,city,72601,icc:american-legal,https://codelibrary.amlegal.com/codes/tulare/latest/overview,publisher-license-or-cpra
+Walnut Creek,city,70817,icc:ecode360,https://ecode360.com/WA4684,publisher-license-or-cpra
+Eastvale,city,70751,civicplus:municode,https://library.municode.com/ca/eastvale,publisher-license-or-cpra
+Dublin,city,70544,icc:ecode360,https://ecode360.com/DU4414,publisher-license-or-cpra
+Camarillo,city,69881,civicplus:municode,https://library.municode.com/ca/camarillo,publisher-license-or-cpra
+Baldwin Park,city,69247,icc:american-legal,https://codelibrary.amlegal.com/codes/baldwinpark/latest/overview,publisher-license-or-cpra
+San Benito County,county,69159,icc:american-legal,https://codelibrary.amlegal.com/codes/sanbenitocounty/latest/overview,publisher-license-or-cpra
+Yuba City,city,69148,none-found,,check-city-site-or-cpra
+Madera,city,69094,none-found,,check-city-site-or-cpra
+Lodi,city,68642,civicplus:municode,https://library.municode.com/ca/lodi,publisher-license-or-cpra
+Redondo Beach,city,68075,icc:ecode360,https://ecode360.com/RE4995,publisher-license-or-cpra
+Lake County,county,67764,civicplus:municode,https://library.municode.com/ca/lake_county,publisher-license-or-cpra
+Palo Alto,city,67658,icc:american-legal,https://codelibrary.amlegal.com/codes/paloalto/latest/overview,publisher-license-or-cpra
+Davis,city,67125,icc:ecode360,https://ecode360.com/DA4922,publisher-license-or-cpra
+Yorba Linda,city,66489,icc:ecode360,https://ecode360.com/YO5039,publisher-license-or-cpra
+Brentwood,city,66286,icc:ecode360,https://ecode360.com/BR4906,publisher-license-or-cpra
+Union City,city,66196,none-found,,check-city-site-or-cpra
+South San Francisco,city,64660,icc:ecode360,https://ecode360.com/SO5016,publisher-license-or-cpra
+Tehama County,county,64451,civicplus:municode,https://library.municode.com/ca/tehama_county,publisher-license-or-cpra
+Laguna Niguel,city,64185,icc:american-legal;civicplus:municode,https://codelibrary.amlegal.com/codes/lagunaniguelca/latest/overview;https://library.municode.com/ca/laguna_niguel,publisher-license-or-cpra
+Lynwood,city,63596,icc:ecode360,https://ecode360.com/LY4521,publisher-license-or-cpra
+Porterville,city,63517,icc:american-legal,https://codelibrary.amlegal.com/codes/portervilleca/latest/overview,publisher-license-or-cpra
+Woodland,city,62983,icc:ecode360,https://ecode360.com/WO5036,publisher-license-or-cpra
+San Clemente,city,62627,civicplus:municode,https://library.municode.com/ca/san_clemente,publisher-license-or-cpra
+Santa Cruz,city,62581,icc:ecode360,https://ecode360.com/SA4628,publisher-license-or-cpra
+La Habra,city,61391,icc:ecode360,https://ecode360.com/LA4951,publisher-license-or-cpra
+Encinitas,city,61137,icc:ecode360,https://ecode360.com/EN5042,publisher-license-or-cpra
+La Mesa,city,60767,civicplus:municode,https://library.municode.com/ca/la_mesa,publisher-license-or-cpra
+Montebello,city,60617,civicplus:municode,https://library.municode.com/ca/montebello,publisher-license-or-cpra
+Hanford,city,60594,icc:ecode360,https://ecode360.com/HA4933,publisher-license-or-cpra
+Gilroy,city,60390,icc:ecode360,https://ecode360.com/GI4458,publisher-license-or-cpra
+San Rafael,city,59961,civicplus:municode,https://library.municode.com/ca/san_rafael,publisher-license-or-cpra
+Beaumont,city,59502,civicplus:municode,https://library.municode.com/ca/beaumont,publisher-license-or-cpra
+Petaluma,city,59393,none-found,,check-city-site-or-cpra
+Pico Rivera,city,59363,icc:ecode360,https://ecode360.com/PI4985,publisher-license-or-cpra
+Santee,city,59104,icc:ecode360,https://ecode360.com/SA5010,publisher-license-or-cpra
+Gardena,city,58921,icc:ecode360,https://ecode360.com/GA4453,publisher-license-or-cpra
+Cupertino,city,58710,none-found,,check-city-site-or-cpra
+National City,city,58460,none-found,,check-city-site-or-cpra
+Monterey Park,city,57996,icc:ecode360,https://ecode360.com/MO4971,publisher-license-or-cpra
+Highland,city,56499,icc:ecode360,https://ecode360.com/HI4479,publisher-license-or-cpra
+Lincoln,city,56268,civicplus:municode,https://library.municode.com/ca/lincoln,publisher-license-or-cpra
+Fountain Valley,city,56036,icc:ecode360,https://ecode360.com/FO4927,publisher-license-or-cpra
+West Sacramento,city,55991,icc:ecode360,https://ecode360.com/WE5032,publisher-license-or-cpra
+San Jacinto,city,55515,icc:ecode360,https://ecode360.com/SA4621,publisher-license-or-cpra
+Arcadia,city,54472,civicplus:municode,https://library.municode.com/ca/arcadia,publisher-license-or-cpra
+Yucaipa,city,54465,icc:ecode360,https://ecode360.com/YU5041,publisher-license-or-cpra
+Tuolumne County,county,53893,none-found,,check-city-site-or-cpra
+Colton,city,53528,civicplus:municode,https://library.municode.com/ca/colton,publisher-license-or-cpra
+Placentia,city,53395,icc:ecode360,https://ecode360.com/PL4986,publisher-license-or-cpra
+Delano,city,53198,civicplus:municode,https://library.municode.com/ca/delano,publisher-license-or-cpra
+Palm Desert,city,53147,icc:ecode360,https://ecode360.com/PA4981,publisher-license-or-cpra
+Cathedral City,city,52517,none-found,,check-city-site-or-cpra
+Novato,city,52311,civicplus:municode,https://library.municode.com/ca/novato,publisher-license-or-cpra
+Diamond Bar,city,52292,civicplus:municode,https://library.municode.com/ca/diamond_bar,publisher-license-or-cpra
+Huntington Park,city,52166,icc:ecode360,https://ecode360.com/HU4938,publisher-license-or-cpra
+Watsonville,city,51320,icc:code-publishing,https://www.codepublishing.com/CA/Watsonville/,publisher-license-or-cpra
+Paramount,city,51169,icc:ecode360,https://ecode360.com/PA4983,publisher-license-or-cpra
+Aliso Viejo,city,50457,icc:code-publishing,https://www.codepublishing.com/CA/AlisoViejo/,publisher-license-or-cpra
+Glendora,city,50101,icc:ecode360,https://ecode360.com/GL4930,publisher-license-or-cpra
+San Luis Obispo,city,49729,none-found,,check-city-site-or-cpra
+Rosemead,city,49582,civicplus:municode,https://library.municode.com/ca/rosemead,publisher-license-or-cpra
+Poway,city,49435,icc:ecode360,https://ecode360.com/PO4597,publisher-license-or-cpra
+Cypress,city,49286,icc:ecode360,https://ecode360.com/CY4920,publisher-license-or-cpra
+Ceres,city,49253,civicplus:municode,https://library.municode.com/ca/ceres,publisher-license-or-cpra
+Covina,city,49245,icc:ecode360,https://ecode360.com/CO4400,publisher-license-or-cpra
+Los Banos,city,48684,icc:ecode360,https://ecode360.com/LO4965,publisher-license-or-cpra
+Azusa,city,48383,civicplus:municode,https://library.municode.com/ca/azusa,publisher-license-or-cpra
+Brea,city,47844,icc:ecode360,https://ecode360.com/BR6949,publisher-license-or-cpra
+Oakley,city,47158,icc:ecode360,https://ecode360.com/OA4568,publisher-license-or-cpra
+Cerritos,city,46851,icc:ecode360,https://ecode360.com/CE4381,publisher-license-or-cpra
+Calaveras County,county,46505,civicplus:municode,https://library.municode.com/ca/calaveras_county,publisher-license-or-cpra
+La Mirada,city,46367,icc:american-legal,https://codelibrary.amlegal.com/codes/lamirada/latest/overview,publisher-license-or-cpra
+Rancho Santa Margarita,city,46353,civicplus:municode,https://library.municode.com/ca/rancho_santa_margarita,publisher-license-or-cpra
+Newark,city,46254,civicplus:municode,https://library.municode.com/ca/newark,publisher-license-or-cpra
+Morgan Hill,city,45952,civicplus:municode,https://library.municode.com/ca/morgan_hill,publisher-license-or-cpra
+Palm Springs,city,45453,icc:ecode360,https://ecode360.com/PA4982,publisher-license-or-cpra
+Coachella,city,45165,civicplus:municode,https://library.municode.com/ca/coachella,publisher-license-or-cpra
+Hollister,city,45033,civicplus:municode,https://library.municode.com/ca/hollister,publisher-license-or-cpra
+Rohnert Park,city,44894,civicplus:municode,https://library.municode.com/ca/rohnert_park,publisher-license-or-cpra
+El Centro,city,44230,civicplus:municode,https://library.municode.com/ca/el_centro,publisher-license-or-cpra
+Lompoc,city,43594,icc:ecode360,https://ecode360.com/LO4961,publisher-license-or-cpra
+Danville,town,43410,icc:american-legal,https://codelibrary.amlegal.com/codes/danvilleca/latest/overview,publisher-license-or-cpra
+Campbell,city,42895,civicplus:municode,https://library.municode.com/ca/campbell,publisher-license-or-cpra
+Siskiyou County,county,42498,civicplus:municode,https://library.municode.com/ca/siskiyou_county,publisher-license-or-cpra
+San Bruno,city,42035,icc:ecode360,https://ecode360.com/SA5001,publisher-license-or-cpra
+Amador County,county,42026,icc:ecode360,https://ecode360.com/AM4323,publisher-license-or-cpra
+Stanton,city,41188,icc:ecode360,https://ecode360.com/ST5018,publisher-license-or-cpra
+Lathrop,city,40860,icc:ecode360,https://ecode360.com/LA4956,publisher-license-or-cpra
+Rancho Palos Verdes,city,40064,civicplus:municode,https://library.municode.com/ca/rancho_palos_verdes,publisher-license-or-cpra
+La Quinta,city,39907,civicplus:municode,https://library.municode.com/ca/la_quinta,publisher-license-or-cpra
+Culver City,city,39883,none-found,,check-city-site-or-cpra
+Calexico,city,38744,civicplus:municode,https://library.municode.com/ca/calexico,publisher-license-or-cpra
+Adelanto,city,37941,icc:american-legal,https://codelibrary.amlegal.com/codes/adelanto/latest/overview,publisher-license-or-cpra
+San Gabriel,city,37926,icc:american-legal,https://codelibrary.amlegal.com/codes/sangabriel/latest/overview,publisher-license-or-cpra
+Monrovia,city,37787,icc:american-legal,https://codelibrary.amlegal.com/codes/monrovia/latest/overview,publisher-license-or-cpra
+Wildomar,city,37736,icc:ecode360,https://ecode360.com/WI5035,publisher-license-or-cpra
+Montclair,city,37650,civicplus:municode,https://library.municode.com/ca/montclair,publisher-license-or-cpra
+Bell Gardens,city,37565,icc:ecode360,https://ecode360.com/BE4350,publisher-license-or-cpra
+Pacifica,city,37056,civicplus:municode,https://library.municode.com/ca/pacifica,publisher-license-or-cpra
+Martinez,city,37006,icc:ecode360,https://ecode360.com/MA6944,publisher-license-or-cpra
+La Puente,city,36670,icc:american-legal,https://codelibrary.amlegal.com/codes/lapuente/latest/overview,publisher-license-or-cpra
+Claremont,city,36139,icc:ecode360,https://ecode360.com/CL4916,publisher-license-or-cpra
+Moorpark,city,35621,icc:ecode360,https://ecode360.com/MO4972,publisher-license-or-cpra
+San Juan Capistrano,city,35469,icc:ecode360,https://ecode360.com/SA5003,publisher-license-or-cpra
+Temple City,city,34989,none-found,,check-city-site-or-cpra
+West Hollywood,city,34371,icc:ecode360,https://ecode360.com/WE5031,publisher-license-or-cpra
+Pleasant Hill,city,34169,icc:ecode360,https://ecode360.com/PL4591,publisher-license-or-cpra
+Desert Hot Springs,city,33917,icc:ecode360,https://ecode360.com/DE4923,publisher-license-or-cpra
+Manhattan Beach,city,33453,civicplus:municode,https://library.municode.com/ca/manhattan_beach,publisher-license-or-cpra
+San Dimas,city,33226,icc:ecode360,https://ecode360.com/SA5002,publisher-license-or-cpra
+Menlo Park,city,33040,icc:ecode360,https://ecode360.com/ME4536,publisher-license-or-cpra
+Los Gatos,town,32952,civicplus:municode,https://library.municode.com/ca/los_gatos,publisher-license-or-cpra
+Foster City,city,32657,none-found,,check-city-site-or-cpra
+Goleta,city,32611,icc:ecode360,https://ecode360.com/GO4931,publisher-license-or-cpra
+Dana Point,city,32585,icc:ecode360,https://ecode360.com/DA4921,publisher-license-or-cpra
+Atwater,city,32248,civicplus:municode,https://library.municode.com/ca/atwater,publisher-license-or-cpra
+Bell,city,31930,icc:ecode360,https://ecode360.com/BE4903,publisher-license-or-cpra
+Banning,city,31929,civicplus:municode,https://library.municode.com/ca/banning,publisher-license-or-cpra
+Santa Paula,city,31786,icc:american-legal,https://codelibrary.amlegal.com/codes/santapaula/latest/overview,publisher-license-or-cpra
+El Paso de Robles (Paso Robles),city,31568,none-found,,check-city-site-or-cpra
+San Pablo,city,31562,icc:ecode360,https://ecode360.com/SA4625,publisher-license-or-cpra
+Seaside,city,31524,icc:ecode360,https://ecode360.com/SE4632,publisher-license-or-cpra
+Beverly Hills,city,31027,icc:american-legal,https://codelibrary.amlegal.com/codes/beverlyhillsca/latest/overview,publisher-license-or-cpra
+Burlingame,city,30885,icc:ecode360,https://ecode360.com/BU4910,publisher-license-or-cpra
+Los Altos,city,30864,civicplus:municode,https://library.municode.com/ca/los_altos,publisher-license-or-cpra
+Saratoga,city,30486,civicplus:municode,https://library.municode.com/ca/saratoga,publisher-license-or-cpra
+Laguna Hills,city,30378,icc:ecode360,https://ecode360.com/LA4505,publisher-license-or-cpra
+La Verne,city,30192,icc:ecode360,https://ecode360.com/LA6633,publisher-license-or-cpra
+Lawndale,city,30160,icc:ecode360,https://ecode360.com/LA4957,publisher-license-or-cpra
+Atascadero,city,29743,icc:ecode360,https://ecode360.com/AT4901,publisher-license-or-cpra
+Suisun City,city,29614,none-found,,check-city-site-or-cpra
+San Carlos,city,29403,icc:code-publishing,https://www.codepublishing.com/CA/SanCarlos/,publisher-license-or-cpra
+East Palo Alto,city,29296,civicplus:municode,https://library.municode.com/ca/east_palo_alto,publisher-license-or-cpra
+Monterey,city,29015,none-found,,check-city-site-or-cpra
+Ridgecrest,city,28373,civicplus:municode,https://library.municode.com/ca/ridgecrest,publisher-license-or-cpra
+Lassen County,county,28340,icc:ecode360,https://ecode360.com/LA4955,publisher-license-or-cpra
+Glenn County,county,28304,none-found,,check-city-site-or-cpra
+Brawley,city,28188,civicplus:municode,https://library.municode.com/ca/brawley,publisher-license-or-cpra
+Lemon Grove,city,27867,icc:ecode360,https://ecode360.com/LE4958,publisher-license-or-cpra
+Wasco,city,27409,none-found,,check-city-site-or-cpra
+Walnut,city,27250,icc:ecode360,https://ecode360.com/WA5028,publisher-license-or-cpra
+Belmont,city,27132,civicplus:municode,https://library.municode.com/ca/belmont,publisher-license-or-cpra
+Lemoore,city,27057,icc:american-legal,https://codelibrary.amlegal.com/codes/lemooreca/latest/overview,publisher-license-or-cpra
+Del Norte County,county,27009,civicplus:municode,https://library.municode.com/ca/del_norte_county,publisher-license-or-cpra
+Sanger,city,26649,civicplus:municode,https://library.municode.com/ca/sanger,publisher-license-or-cpra
+Galt,city,26589,icc:ecode360,https://ecode360.com/GA4451,publisher-license-or-cpra
+Twentynine Palms,city,26563,civicplus:municode,https://library.municode.com/ca/twentynine_palms,publisher-license-or-cpra
+Hercules,city,26499,icc:ecode360,https://ecode360.com/HE4476,publisher-license-or-cpra
+Benicia,city,26477,icc:ecode360,https://ecode360.com/BE4354,publisher-license-or-cpra
+El Cerrito,city,26409,civicplus:municode,https://library.municode.com/ca/el_cerrito,publisher-license-or-cpra
+Soledad,city,26345,civicplus:municode,https://library.municode.com/ca/soledad,publisher-license-or-cpra
+Reedley,city,26138,icc:american-legal,https://codelibrary.amlegal.com/codes/reedleyca/latest/overview,publisher-license-or-cpra
+Windsor,town,25846,civicplus:municode,https://library.municode.com/ca/windsor,publisher-license-or-cpra
+Dinuba,city,25833,icc:ecode360,https://ecode360.com/DI4410,publisher-license-or-cpra
+South Pasadena,city,25656,icc:code-publishing,https://www.codepublishing.com/CA/SouthPasadena/,publisher-license-or-cpra
+Riverbank,city,25625,icc:american-legal,https://codelibrary.amlegal.com/codes/riverbank/latest/overview,publisher-license-or-cpra
+Imperial Beach,city,25568,icc:ecode360,https://ecode360.com/IM4939,publisher-license-or-cpra
+Patterson,city,25495,icc:ecode360,https://ecode360.com/PA4584,publisher-license-or-cpra
+Eureka,city,25412,icc:american-legal,https://codelibrary.amlegal.com/codes/eureka/latest/overview,publisher-license-or-cpra
+Norco,city,25400,icc:ecode360,https://ecode360.com/NO4562,publisher-license-or-cpra
+Lafayette,city,25371,civicplus:municode,https://library.municode.com/ca/lafayette,publisher-license-or-cpra
+Loma Linda,city,25197,icc:ecode360,https://ecode360.com/LO4960,publisher-license-or-cpra
+Barstow,city,24897,civicplus:municode,https://library.municode.com/ca/barstow,publisher-license-or-cpra
+Selma,city,24505,icc:american-legal,https://codelibrary.amlegal.com/codes/selmaca/latest/overview,publisher-license-or-cpra
+Seal Beach,city,24421,icc:ecode360,https://ecode360.com/SE5012,publisher-license-or-cpra
+Maywood,city,23838,civicplus:municode,https://library.municode.com/ca/maywood,publisher-license-or-cpra
+Duarte,city,23493,civicplus:municode,https://library.municode.com/ca/duarte,publisher-license-or-cpra
+San Fernando,city,23488,civicplus:municode,https://library.municode.com/ca/san_fernando,publisher-license-or-cpra
+Millbrae,city,23321,icc:ecode360,https://ecode360.com/MI4538,publisher-license-or-cpra
+Oakdale,city,23209,icc:ecode360,https://ecode360.com/OA4108,publisher-license-or-cpra
+Marina,city,23047,none-found,,check-city-site-or-cpra
+Shafter,city,22754,civicplus:municode,https://library.municode.com/ca/shafter,publisher-license-or-cpra
+Corcoran,city,22627,icc:american-legal,https://codelibrary.amlegal.com/codes/corcoranca/latest/overview,publisher-license-or-cpra
+Laguna Beach,city,22564,icc:ecode360,https://ecode360.com/LA4953,publisher-license-or-cpra
+Calabasas,city,22256,civicplus:municode,https://library.municode.com/ca/city_of_calabasas,publisher-license-or-cpra
+Imperial,city,22102,none-found,,check-city-site-or-cpra
+Colusa County,county,22074,none-found,,check-city-site-or-cpra
+Yucca Valley,town,21858,icc:american-legal,https://codelibrary.amlegal.com/codes/yuccavalleyca/latest/overview,publisher-license-or-cpra
+American Canyon,city,21742,none-found,,check-city-site-or-cpra
+Cudahy,city,21694,none-found,,check-city-site-or-cpra
+Port Hueneme,city,21325,civicplus:municode,https://library.municode.com/ca/port_hueneme,publisher-license-or-cpra
+South Lake Tahoe,city,21225,icc:ecode360,https://ecode360.com/SO4651,publisher-license-or-cpra
+Greenfield,city,21042,icc:ecode360,https://ecode360.com/GR4468,publisher-license-or-cpra
+Dixon,city,20296,icc:ecode360,https://ecode360.com/DI4411,publisher-license-or-cpra
+Lomita,city,19841,civicplus:municode,https://library.municode.com/ca/lomita,publisher-license-or-cpra
+Oroville,city,19712,icc:ecode360,https://ecode360.com/OR4980,publisher-license-or-cpra
+Arvin,city,19661,civicplus:municode,https://library.municode.com/ca/arvin,publisher-license-or-cpra
+La Cañada Flintridge,city,19621,icc:ecode360,https://ecode360.com/LA4950,publisher-license-or-cpra
+Orinda,city,19573,civicplus:municode,https://library.municode.com/ca/orinda,publisher-license-or-cpra
+Albany,city,19439,icc:ecode360,https://ecode360.com/AL4074,publisher-license-or-cpra
+Agoura Hills,city,19429,civicplus:municode,https://library.municode.com/ca/agoura_hills,publisher-license-or-cpra
+Chowchilla,city,19191,civicplus:municode,https://library.municode.com/ca/chowchilla_city,publisher-license-or-cpra
+South El Monte,city,19121,icc:ecode360,https://ecode360.com/SO5015,publisher-license-or-cpra
+Plumas County,county,18834,civicplus:municode,https://library.municode.com/ca/plumas_county,publisher-license-or-cpra
+Arcata,city,18748,icc:code-publishing,https://www.codepublishing.com/CA/Arcata/,publisher-license-or-cpra
+Hermosa Beach,city,18687,icc:code-publishing,https://www.codepublishing.com/CA/HermosaBeach/,publisher-license-or-cpra
+Santa Fe Springs,city,18683,civicplus:municode,https://library.municode.com/ca/santa_fe_springs,publisher-license-or-cpra
+Pinole,city,18663,icc:american-legal,https://codelibrary.amlegal.com/codes/pinole/latest/overview,publisher-license-or-cpra
+Inyo County,county,18485,icc:ecode360,https://ecode360.com/IN4943,publisher-license-or-cpra
+Arroyo Grande,city,18249,civicplus:municode,https://library.municode.com/ca/arroyo_grande,publisher-license-or-cpra
+Coronado,city,18031,none-found,,check-city-site-or-cpra
+Rancho Mirage,city,18001,icc:ecode360,https://ecode360.com/RA4993,publisher-license-or-cpra
+Kerman,city,17497,icc:ecode360,https://ecode360.com/KE4495,publisher-license-or-cpra
+Blythe,city,17320,civicplus:municode,https://library.municode.com/ca/blythe,publisher-license-or-cpra
+Truckee,town,17240,civicplus:municode,https://library.municode.com/ca/truckee,publisher-license-or-cpra
+Fillmore,city,17216,civicplus:municode,https://library.municode.com/ca/fillmore,publisher-license-or-cpra
+Laguna Woods,city,17058,civicplus:municode,https://library.municode.com/ca/laguna_woods,publisher-license-or-cpra
+Mariposa County,county,17048,civicplus:municode,https://library.municode.com/ca/mariposa_county,publisher-license-or-cpra
+Coalinga,city,16722,civicplus:municode,https://library.municode.com/ca/coalinga,publisher-license-or-cpra
+Moraga,town,16698,civicplus:municode,https://library.municode.com/ca/moraga,publisher-license-or-cpra
+Clearlake,city,16636,none-found,,check-city-site-or-cpra
+El Segundo,city,16544,icc:american-legal,https://codelibrary.amlegal.com/codes/elsegundoca/latest/overview,publisher-license-or-cpra
+Ripon,city,16252,none-found,,check-city-site-or-cpra
+Ukiah,city,16067,icc:ecode360,https://ecode360.com/UK4676,publisher-license-or-cpra
+Artesia,city,15662,icc:ecode360,https://ecode360.com/AR4900,publisher-license-or-cpra
+Trinity County,county,15642,civicplus:municode,https://library.municode.com/ca/trinity_county,publisher-license-or-cpra
+La Palma,city,15092,civicplus:municode,https://library.municode.com/ca/la_palma,publisher-license-or-cpra
+Pacific Grove,city,14851,icc:ecode360,https://ecode360.com/PA4577,publisher-license-or-cpra
+Livingston,city,14767,icc:american-legal,https://codelibrary.amlegal.com/codes/livingstonca/latest/overview,publisher-license-or-cpra
+Parlier,city,14429,civicplus:municode,https://library.municode.com/ca/parlier,publisher-license-or-cpra
+McFarland,city,14365,civicplus:municode,https://library.municode.com/ca/mcfarland,publisher-license-or-cpra
+Red Bluff,city,14286,icc:american-legal,https://codelibrary.amlegal.com/codes/redbluff/latest/overview,publisher-license-or-cpra
+Avenal,city,14108,none-found,,check-city-site-or-cpra
+Grass Valley,city,14085,civicplus:municode,https://library.municode.com/ca/grass_valley,publisher-license-or-cpra
+King City,city,13920,none-found,,check-city-site-or-cpra
+Emeryville,city,13912,icc:ecode360,https://ecode360.com/EM4426,publisher-license-or-cpra
+Mill Valley,city,13904,icc:ecode360,https://ecode360.com/MI4968,publisher-license-or-cpra
+Auburn,city,13780,civicplus:municode,https://library.municode.com/ca/auburn,publisher-license-or-cpra
+Hawaiian Gardens,city,13457,civicplus:municode,https://library.municode.com/ca/hawaiian_gardens,publisher-license-or-cpra
+California City,city,13174,none-found,,check-city-site-or-cpra
+Kingsburg,city,13128,civicplus:municode,https://library.municode.com/ca/kingsburg,publisher-license-or-cpra
+Mono County,county,12991,civicplus:municode,https://library.municode.com/ca/mono_county,publisher-license-or-cpra
+Grand Terrace,city,12979,civicplus:municode,https://library.municode.com/ca/grand_terrace,publisher-license-or-cpra
+Carpinteria,city,12876,civicplus:municode,https://library.municode.com/ca/carpinteria,publisher-license-or-cpra
+Solana Beach,city,12868,icc:code-publishing,https://www.codepublishing.com/CA/SolanaBeach/,publisher-license-or-cpra
+Larkspur,city,12807,none-found,,check-city-site-or-cpra
+Marysville,city,12714,icc:ecode360,https://ecode360.com/MA4528,publisher-license-or-cpra
+Lindsay,city,12706,civicplus:municode,https://library.municode.com/ca/lindsay,publisher-license-or-cpra
+Palos Verdes Estates,city,12668,icc:ecode360,https://ecode360.com/PA4580,publisher-license-or-cpra
+San Anselmo,town,12645,civicplus:municode,https://library.municode.com/ca/san_anselmo,publisher-license-or-cpra
+Mendota,city,12623,civicplus:municode,https://library.municode.com/ca/mendota,publisher-license-or-cpra
+Grover Beach,city,12534,icc:american-legal,https://codelibrary.amlegal.com/codes/groverbeachca/latest/overview,publisher-license-or-cpra
+Susanville,city,12359,icc:ecode360,https://ecode360.com/SU5021,publisher-license-or-cpra
+Newman,city,12292,icc:ecode360,https://ecode360.com/NE4557,publisher-license-or-cpra
+Fortuna,city,12114,icc:ecode360,https://ecode360.com/FO4448,publisher-license-or-cpra
+San Marino,city,12105,icc:american-legal,https://codelibrary.amlegal.com/codes/sanmarinoca/latest/overview,publisher-license-or-cpra
+Commerce,city,11882,civicplus:municode,https://library.municode.com/ca/commerce,publisher-license-or-cpra
+Los Alamitos,city,11846,icc:ecode360,https://ecode360.com/LO4963,publisher-license-or-cpra
+Scotts Valley,city,11828,civicplus:municode,https://library.municode.com/ca/scotts_valley,publisher-license-or-cpra
+Half Moon Bay,city,11324,icc:ecode360,https://ecode360.com/HA4470,publisher-license-or-cpra
+Signal Hill,city,11279,icc:american-legal,https://codelibrary.amlegal.com/codes/signalhill/latest/overview,publisher-license-or-cpra
+Healdsburg,city,11231,icc:ecode360,https://ecode360.com/HE4475,publisher-license-or-cpra
+Anderson,city,11171,civicplus:municode,https://library.municode.com/ca/anderson,publisher-license-or-cpra
+Hillsborough,town,11171,civicplus:municode,https://library.municode.com/ca/hillsborough,publisher-license-or-cpra
+Canyon Lake,city,11161,icc:american-legal,https://codelibrary.amlegal.com/codes/canyonlakeca/latest/overview,publisher-license-or-cpra
+Calimesa,city,11150,icc:ecode360,https://ecode360.com/CA4374,publisher-license-or-cpra
+Tehachapi,city,11114,civicplus:municode,https://library.municode.com/ca/tehachapi,publisher-license-or-cpra
+Clayton,city,10933,civicplus:municode,https://library.municode.com/ca/clayton,publisher-license-or-cpra
+Piedmont,city,10816,none-found,,check-city-site-or-cpra
+Sierra Madre,city,10775,civicplus:municode,https://library.municode.com/ca/sierra_madre,publisher-license-or-cpra
+Placerville,city,10695,icc:american-legal,https://codelibrary.amlegal.com/codes/placervilleca/latest/overview,publisher-license-or-cpra
+Sonoma,city,10606,none-found,,check-city-site-or-cpra
+Morro Bay,city,10591,civicplus:municode,https://library.municode.com/ca/morro_bay,publisher-license-or-cpra
+Farmersville,city,10501,civicplus:municode,https://library.municode.com/ca/farmersville,publisher-license-or-cpra
+Malibu,city,10298,icc:ecode360,https://ecode360.com/MA5043,publisher-license-or-cpra
+Rio Vista,city,10248,icc:ecode360,https://ecode360.com/RI4996,publisher-license-or-cpra
+Shasta Lake,city,10244,civicplus:municode,https://library.municode.com/ca/shasta_lake,publisher-license-or-cpra
+Exeter,city,10186,civicplus:municode,https://library.municode.com/ca/exeter,publisher-license-or-cpra
+Corte Madera,town,10006,civicplus:municode,https://library.municode.com/ca/corte_madera,publisher-license-or-cpra
+Orange Cove,city,9708,civicplus:municode,https://library.municode.com/ca/orange_cove,publisher-license-or-cpra
+Capitola,city,9503,icc:code-publishing,https://www.codepublishing.com/CA/Capitola/,publisher-license-or-cpra
+Live Oak,city,9503,icc:ecode360,https://ecode360.com/LI4959,publisher-license-or-cpra
+Ione,city,9411,civicplus:municode,https://library.municode.com/ca/ione,publisher-license-or-cpra
+Waterford,city,9271,icc:ecode360,https://ecode360.com/WA5030,publisher-license-or-cpra
+Paradise,town,9114,civicplus:municode,https://library.municode.com/ca/paradise,publisher-license-or-cpra
+Tiburon,town,8933,civicplus:municode,https://library.municode.com/ca/tiburon,publisher-license-or-cpra
+Cloverdale,city,8784,icc:ecode360,https://ecode360.com/CL4387,publisher-license-or-cpra
+Guadalupe,city,8735,icc:ecode360,https://ecode360.com/GU4932,publisher-license-or-cpra
+Orland,city,8605,civicplus:municode,https://library.municode.com/ca/orland,publisher-license-or-cpra
+Modoc County,county,8491,civicplus:municode,https://library.municode.com/ca/modoc_county,publisher-license-or-cpra
+Los Altos Hills,town,8435,icc:ecode360,https://ecode360.com/LO4964,publisher-license-or-cpra
+Gonzales,city,8431,icc:ecode360,https://ecode360.com/GO4462,publisher-license-or-cpra
+Firebaugh,city,8424,icc:ecode360,https://ecode360.com/FI4072,publisher-license-or-cpra
+Corning,city,8131,civicplus:municode,https://library.municode.com/ca/corning,publisher-license-or-cpra
+Rolling Hills Estates,city,8007,civicplus:municode,https://library.municode.com/ca/rolling_hills_estates,publisher-license-or-cpra
+Pismo Beach,city,7984,icc:american-legal,https://codelibrary.amlegal.com/codes/pismobeach/latest/overview,publisher-license-or-cpra
+Hughson,city,7903,icc:ecode360,https://ecode360.com/HU4486,publisher-license-or-cpra
+Winters,city,7825,icc:ecode360,https://ecode360.com/WI4698,publisher-license-or-cpra
+Woodlake,city,7774,civicplus:municode,https://library.municode.com/ca/woodlake,publisher-license-or-cpra
+Yreka,city,7686,civicplus:municode,https://library.municode.com/ca/yreka,publisher-license-or-cpra
+Westlake Village,city,7593,civicplus:municode,https://library.municode.com/ca/westlake_village,publisher-license-or-cpra
+Ojai,city,7563,icc:ecode360,https://ecode360.com/OJ4979,publisher-license-or-cpra
+Fairfax,town,7476,icc:american-legal,https://codelibrary.amlegal.com/codes/fairfax/latest/overview,publisher-license-or-cpra
+Fowler,city,7470,civicplus:municode,https://library.municode.com/ca/fowler,publisher-license-or-cpra
+Escalon,city,7453,icc:ecode360,https://ecode360.com/ES4431,publisher-license-or-cpra
+Cotati,city,7403,icc:ecode360,https://ecode360.com/CO4398,publisher-license-or-cpra
+Sebastopol,city,7388,none-found,,check-city-site-or-cpra
+Gridley,city,7355,icc:american-legal,https://codelibrary.amlegal.com/codes/gridley/latest/overview,publisher-license-or-cpra
+Mammoth Lakes,town,7124,civicplus:municode,https://library.municode.com/ca/mammoth_lakes,publisher-license-or-cpra
+Fort Bragg,city,7117,icc:code-publishing,https://www.codepublishing.com/CA/FortBragg/,publisher-license-or-cpra
+Sausalito,city,7075,icc:ecode360,https://ecode360.com/SA4880,publisher-license-or-cpra
+Atherton,town,7022,none-found,,check-city-site-or-cpra
+Taft,city,6988,icc:american-legal,https://codelibrary.amlegal.com/codes/taftca/latest/overview,publisher-license-or-cpra
+Loomis,town,6939,icc:ecode360,https://ecode360.com/LO4962,publisher-license-or-cpra
+Huron,city,6737,civicplus:municode,https://library.municode.com/ca/huron,publisher-license-or-cpra
+Colusa,city,6589,civicplus:municode,https://library.municode.com/ca/colusa,publisher-license-or-cpra
+Calipatria,city,6522,none-found,,check-city-site-or-cpra
+Crescent City,city,6209,none-found,,check-city-site-or-cpra
+Gustine,city,6138,civicplus:municode,https://library.municode.com/ca/gustine,publisher-license-or-cpra
+Willows,city,6079,icc:ecode360,https://ecode360.com/WI4695,publisher-license-or-cpra
+Solvang,city,5988,icc:ecode360,https://ecode360.com/SO5014,publisher-license-or-cpra
+Dos Palos,city,5759,none-found,,check-city-site-or-cpra
+Villa Park,city,5698,civicplus:municode,https://library.municode.com/ca/villa_park,publisher-license-or-cpra
+Holtville,city,5612,icc:ecode360,https://ecode360.com/HO4480,publisher-license-or-cpra
+Williams,city,5598,civicplus:municode,https://library.municode.com/ca/williams,publisher-license-or-cpra
+La Habra Heights,city,5382,icc:ecode360,https://ecode360.com/LA4503,publisher-license-or-cpra
+St. Helena,city,5257,none-found,,check-city-site-or-cpra
+Woodside,town,5123,civicplus:municode,https://library.municode.com/ca/woodside,publisher-license-or-cpra
+Lakeport,city,5104,icc:ecode360,https://ecode360.com/LA4510,publisher-license-or-cpra
+Jackson,city,5079,icc:ecode360,https://ecode360.com/JA4944,publisher-license-or-cpra
+Big Bear Lake,city,5044,civicplus:municode,https://library.municode.com/ca/big_bear_lake,publisher-license-or-cpra
+Buellton,city,5023,icc:ecode360,https://ecode360.com/BU4908,publisher-license-or-cpra
+Calistoga,city,5022,icc:ecode360,https://ecode360.com/CA1828,publisher-license-or-cpra
+Indian Wells,city,4989,icc:ecode360,https://ecode360.com/IN4940,publisher-license-or-cpra
+Sonora,city,4855,civicplus:municode,https://library.municode.com/ca/sonora,publisher-license-or-cpra
+Willits,city,4844,civicplus:municode,https://library.municode.com/ca/willits,publisher-license-or-cpra
+Needles,city,4839,none-found,,check-city-site-or-cpra
+Brisbane,city,4667,civicplus:municode,https://library.municode.com/ca/brisbane,publisher-license-or-cpra
+Portola Valley,town,4282,civicplus:municode,https://library.municode.com/ca/portola_valley,publisher-license-or-cpra
+Wheatland,city,4110,icc:ecode360,https://ecode360.com/WH5034,publisher-license-or-cpra
+Del Mar,city,3902,civicplus:municode,https://library.municode.com/ca/del_mar,publisher-license-or-cpra
+Bishop,city,3746,civicplus:municode,https://library.municode.com/ca/bishop,publisher-license-or-cpra
+Angels,city,3728,none-found,,check-city-site-or-cpra
+San Joaquin,city,3679,none-found,,check-city-site-or-cpra
+Monte Sereno,city,3563,civicplus:municode,https://library.municode.com/ca/monte_sereno,publisher-license-or-cpra
+Yountville,city,3280,icc:ecode360,https://ecode360.com/YO5040,publisher-license-or-cpra
+Avalon,city,3267,icc:ecode360,https://ecode360.com/AV4054,publisher-license-or-cpra
+Rio Dell,city,3259,icc:ecode360,https://ecode360.com/RI4611,publisher-license-or-cpra
+Nevada City,city,3195,none-found,,check-city-site-or-cpra
+Carmel-by-the-Sea,city,3124,icc:ecode360,https://ecode360.com/CA4376,publisher-license-or-cpra
+Mount Shasta,city,3124,none-found,,check-city-site-or-cpra
+Sierra County,county,3113,none-found,,check-city-site-or-cpra
+Sutter Creek,city,2709,civicplus:municode,https://library.municode.com/ca/sutter_creek,publisher-license-or-cpra
+Alturas,city,2652,civicplus:municode,https://library.municode.com/ca/alturas,publisher-license-or-cpra
+Weed,city,2633,civicplus:municode,https://library.municode.com/ca/weed,publisher-license-or-cpra
+Ross,town,2297,none-found,,check-city-site-or-cpra
+San Juan Bautista,city,2118,icc:ecode360,https://ecode360.com/SA4622,publisher-license-or-cpra
+Portola,city,2086,civicplus:municode,https://library.municode.com/ca/portola,publisher-license-or-cpra
+Belvedere,city,2080,none-found,,check-city-site-or-cpra
+Colfax,city,2058,civicplus:municode,https://library.municode.com/ca/colfax,publisher-license-or-cpra
+Westmorland,city,2045,none-found,,check-city-site-or-cpra
+Biggs,city,1941,icc:ecode360,https://ecode360.com/BI4357,publisher-license-or-cpra
+Hidden Hills,city,1689,civicplus:municode,https://library.municode.com/ca/hidden_hills,publisher-license-or-cpra
+Rolling Hills,city,1645,civicplus:municode,https://library.municode.com/ca/rolling_hills,publisher-license-or-cpra
+Dunsmuir,city,1618,civicplus:municode,https://library.municode.com/ca/dunsmuir,publisher-license-or-cpra
+Del Rey Oaks,city,1553,civicplus:municode,https://library.municode.com/ca/del_rey_oaks,publisher-license-or-cpra
+Irwindale,city,1459,civicplus:municode,https://library.municode.com/ca/irwindale,publisher-license-or-cpra
+Colma,town,1428,civicplus:municode,https://library.municode.com/ca/colma,publisher-license-or-cpra
+Ferndale,city,1361,none-found,,check-city-site-or-cpra
+Montague,city,1170,none-found,,check-city-site-or-cpra
+Blue Lake,city,1159,icc:ecode360,https://ecode360.com/BL4905,publisher-license-or-cpra
+Plymouth,city,1137,icc:ecode360,https://ecode360.com/PL4989,publisher-license-or-cpra
+Alpine County,county,1099,icc:code-publishing,https://www.codepublishing.com/CA/AlpineCounty/,publisher-license-or-cpra
+Maricopa,city,1012,none-found,,check-city-site-or-cpra
+Bradbury,city,883,civicplus:municode,https://library.municode.com/ca/bradbury,publisher-license-or-cpra
+Tulelake,city,857,none-found,,check-city-site-or-cpra
+Dorris,city,817,none-found,,check-city-site-or-cpra
+Isleton,city,781,civicplus:municode,https://library.municode.com/ca/isleton,publisher-license-or-cpra
+Loyalton,city,712,none-found,,check-city-site-or-cpra
+Fort Jones,city,669,civicplus:municode,https://library.municode.com/ca/fort_jones,publisher-license-or-cpra
+Etna,city,643,icc:ecode360,https://ecode360.com/ET4432,publisher-license-or-cpra
+Point Arena,city,449,icc:ecode360,https://ecode360.com/PO4990,publisher-license-or-cpra
+Tehama,city,436,civicplus:municode,https://library.municode.com/ca/tehama,publisher-license-or-cpra
+Sand City,city,328,none-found,,check-city-site-or-cpra
+Trinidad,city,321,icc:code-publishing,https://www.codepublishing.com/CA/Trinidad/,publisher-license-or-cpra
+Industry,city,256,icc:ecode360,https://ecode360.com/IN4941,publisher-license-or-cpra
+Vernon,city,211,icc:ecode360,https://ecode360.com/VE5027,publisher-license-or-cpra
+Amador City,city,205,none-found,,check-city-site-or-cpra

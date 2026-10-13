@@ -1,0 +1,8 @@
+# generated corpus and caches — build locally, never commit
+legal/
+ok/
+*.zip
+*.jsonl.gz
+*.jsonl.xz
+__pycache__/
+.DS_Store
