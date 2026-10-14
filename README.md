@@ -64,7 +64,8 @@ C.F.R. and California code section they cite (76% resolve to an exact section in
 | `ca-codes` | California Legislative Information (`pubinfo`) | Constitution + 29 codes, 162,526 sections | public domain |
 | `colorado` | Colorado OLLS official annual release (2026) | 35,392 sections + annotations | public domain |
 | `states` | Vaquill Open US Law v2026.09.1 (official-URL sourced) | 52 jurisdictions: 1.61M statute sections, 1.04M regulation sections, 104,540 AG opinions, 48,114 court rules, 11,418 constitutional provisions | text public domain; **compilation CC BY-NC 4.0** |
-| `gap-states` | Public.Resource.Org bulk releases, structured HTML by UniCourt ([GitHub](https://github.com/UniCourt)) | Arkansas (Nov 2020), Georgia (Nov 2022), Mississippi (Jul 2020), Tennessee (May 2021) statutes: 128,476 sections | public domain — **historical snapshots** |
+| `gap-states` | Public.Resource.Org bulk releases, structured HTML by UniCourt ([GitHub](https://github.com/UniCourt)); Arkansas Legislature "Code Sections Amended" tables | Arkansas (Nov 2020), Georgia (Nov 2022), Mississippi (Jul 2020), Tennessee (May 2021) statutes: 128,476 sections. Arkansas sections changed since the snapshot are flagged with links to the official Acts | public domain — **historical snapshots** |
+| `state-regs` | Official state publishers: LA Office of the State Register (.docx), MO Secretary of State (PDF), RI Secretary of State (HTML), mass.gov law library, Hawaii department rule pages | regulations for 5 states the `states` layer lacked: LA 26,675 · MO 11,156 · RI 11,901 · MA 17,807 (unofficial copies) · HI 7,141 (partial) — 74,680 sections | public domain |
 | `san-diego` | San Diego City Clerk | 6,012 sections | public domain |
 | `ca-manifest` | Census + code-publisher directories | all 482 CA cities + 58 counties → publisher | metadata |
 | `case-law` | CourtListener quarterly bulk data (Free Law Project) — includes all of the Caselaw Access Project | every federal, state, territorial, tribal and military court, 1658–Sept 2026 (~12M opinions; `--caselaw-scope` to narrow) | public domain |
@@ -89,7 +90,8 @@ license from Vaquill or replace state by state with official-source builds (`doc
 official text is only on publisher portals that forbid bulk copying; the newest public-domain bulk
 releases are 2020–2022. Every concept says so (`currency`, `stale_after`, tag `historical-snapshot`).
 
-**Gaps:** regulations for 13 jurisdictions (AZ, CA, HI, IN, LA, MA, MO, NJ, NY, RI, TN, TX, VT);
+**Gaps:** regulations for 8 states whose code is only on a vendor platform or blocks automated
+access (AZ, CA, IN, NJ, NY, TN, TX, VT — see `docs/coverage.md` for why and the route for each);
 most city and county codes (commercial-publisher terms — `docs/ca-municipal-manifest.csv` maps every
 CA city); agency decisions after 2022. Full list in `docs/coverage.md`.
 
@@ -106,7 +108,7 @@ corpus is prepared for it; see the roadmap in `docs/coverage.md`.
 ## Repository layout
 
 ```
-tools/      build_legal.py (runner) + 15 converters + okf_validate.py
+tools/      build_legal.py (runner) + 21 converters + okf_validate.py
 samples/    real output: full Constitution and federal court rules, plus a few concepts per layer
 docs/       coverage & validation notes, CA municipal publisher manifest
 ```

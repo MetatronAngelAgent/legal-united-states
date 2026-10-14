@@ -21,6 +21,9 @@ Layers (run in this order; later ones link to earlier ones):
                 court rules, AG opinions (Vaquill Open US Law, CC BY-NC 4.0) ~14 GB
   gap-states    Arkansas, Georgia, Mississippi, Tennessee statutes — newest public-domain
                 bulk releases (Public.Resource.Org/UniCourt on GitHub; 2020-2022 snapshots) ~1 GB
+  state-regs    Official regulations for states the `states` layer lacks: Louisiana (LAC),
+                Missouri (CSR), Rhode Island (RICR), Massachusetts (CMR, unofficial copies),
+                Hawaii (HAR, per department; OCR for scanned chapters)          ~0.6 GB
   san-diego     San Diego Municipal Code (City Clerk PDFs; needs pdftotext)  ~40 MB
   ca-manifest   Every CA city/county -> municipal code publisher             ~1 MB
   fr            Federal Register, 2000–present (govinfo bulk XML)            ~15 GB
@@ -42,11 +45,11 @@ import argparse, datetime as dt, json, os, platform, re, shutil, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 UA = "OKF-LawCorpus/1.0 (open legal-knowledge research; contact " + os.environ.get("LEGAL_US_CONTACT", "see github.com/MetatronAngelAgent/legal-united-states") + ")"
-ORDER = ["constitution", "usc", "court-rules", "cfr", "ca-codes", "colorado", "states", "gap-states", "san-diego", "ca-manifest",
+ORDER = ["constitution", "usc", "court-rules", "cfr", "ca-codes", "colorado", "states", "gap-states", "state-regs", "san-diego", "ca-manifest",
          "fr", "agency", "bva", "case-law", "eval"]
 EST_GB = {"constitution": 0.01, "usc": 1.0, "court-rules": 0.01, "cfr": 2.0, "ca-codes": 0.8,
-          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 200, "eval": 0.1, "colorado": 0.3, "states": 14, "gap-states": 1.0, "case-law-cap": 24}
-DL_GB = {"gap-states": 0.7, "states": 0.3, "colorado": 0.1, "usc": 0.2, "cfr": 1.0, "ca-codes": 1.3, "fr": 1.0, "agency": 1.0, "bva": 2.3, "case-law": 4.0, "case-law-cap": 0.4}  # peak cache
+          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 200, "eval": 0.1, "colorado": 0.3, "states": 14, "gap-states": 1.0, "case-law-cap": 24, "state-regs": 0.6}
+DL_GB = {"state-regs": 1.5, "gap-states": 0.7, "states": 0.3, "colorado": 0.1, "usc": 0.2, "cfr": 1.0, "ca-codes": 1.3, "fr": 1.0, "agency": 1.0, "bva": 2.3, "case-law": 4.0, "case-law-cap": 0.4}  # peak cache
 
 def log(msg):
     print(f"[{dt.datetime.now():%H:%M:%S}] {msg}", flush=True)
@@ -150,6 +153,16 @@ def L_states(root, cache, a):
 def L_gap_states(root, cache, a):
     log("  NOTE: newest public-domain releases are 2020-2022 snapshots; every concept carries `currency`/`stale_after`.")
     run(["pro_codes_to_okf.py", "--cache", os.path.join(cache, "pro-codes"), "--out", root])
+    # flag Arkansas sections changed by Acts since the 2020 snapshot (official Code Sections Amended tables)
+    run(["ar_amendments_to_okf.py", "--cache", os.path.join(cache, "ar-acts"), "--out", root])
+
+def L_state_regs(root, cache, a):
+    for script, key in (("la_lac_to_okf.py", "la"), ("mo_csr_to_okf.py", "mo"), ("ri_ricr_to_okf.py", "ri"),
+                        ("ma_cmr_to_okf.py", "ma"), ("hi_har_to_okf.py", "hi")):
+        if key in ("mo", "ma", "hi") and not shutil.which("pdftotext"):
+            log(f"  SKIP {script}: needs pdftotext (brew install poppler)"); continue
+        run([script, "--cache", os.path.join(cache, "regs-" + key), "--out", root] +
+            (["--ocr"] if key == "hi" and shutil.which("tesseract") else []))
 
 def L_san_diego(root, cache, a):
     if not shutil.which("pdftotext"):
@@ -225,7 +238,7 @@ def L_eval(root, cache, a):
 LAYERS = {"colorado": L_colorado, "states": L_states, "constitution": L_constitution, "usc": L_usc, "court-rules": L_court_rules, "cfr": L_cfr,
           "ca-codes": L_ca_codes, "san-diego": L_san_diego, "ca-manifest": L_ca_manifest, "fr": L_fr,
           "agency": L_agency, "bva": L_bva, "case-law": L_case_law, "case-law-cap": L_case_law_cap, "eval": L_eval,
-          "gap-states": L_gap_states}
+          "gap-states": L_gap_states, "state-regs": L_state_regs}
 
 # ----------------------------------------------------------------------------- bundle root
 TITLES = {"federal": "Federal law", "california": "California", "case-law": "Case law",

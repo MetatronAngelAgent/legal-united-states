@@ -3,7 +3,7 @@ type: "Statute Section"
 title: "Ark. Code Ann. § 5-10-101 — Capital murder"
 description: "Capital murder"
 resource: "https://unicourt.github.io/cic-code-ar/transforms/ar/ocar/r78/gov.ar.code.title.05.html#t05c10s5-10-101"
-tags: ["arkansas", "statutes", "state-law", "title-5", "historical-snapshot"]
+tags: ["arkansas", "statutes", "state-law", "title-5", "historical-snapshot", "amended-since-snapshot"]
 citation: "Ark. Code Ann. § 5-10-101"
 jurisdiction: "arkansas"
 jurisdiction_level: "state"
@@ -17,6 +17,7 @@ generated: { by: "pro_codes_to_okf/1.0", at: "2026-10-14T02:47:13Z" }
 sources: 
   - { id: pro-unicourt, resource: "https://github.com/UniCourt/cic-code-ar/tree/HEAD/transforms/ar/ocar/r78", title: "Arkansas Code of 1987 Annotated — Release 78 of the Official Code of Arkansas Annotated, structured HTML", author: "process:public-resource-org" }
 checksum: "41de68f24209f687f923c844843004efde7d9cd9cdc032e6d6cbb6a01cf55caf"
+amended_after_snapshot: ["Act 659 of 2023R", "Act 599 of 2025R", "Act 662 of 2025R"]
 ---
 
 # Text
@@ -67,3 +68,12 @@ History. Acts 1975, No. 280, § 1501; 1983, No. 341, § 1; 1985, No. 840, § 1; 
 # Notes and annotations
 
 See [Ark. Code Ann. § 5-10-101 — Notes and annotations](sec-5-10-101--annotations.md).
+
+# Amendments since this snapshot
+
+This section was changed after 2020-11-06; the text above is out of date. Official Acts:
+
+- [Act 659 (2023R, SB495)](https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2023R%2FPublic%2FACT659.pdf) — § 5-10-101(a)(3)
+- [Act 659 (2023R, SB495)](https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2023R%2FPublic%2FACT659.pdf) — § 5-10-101(c)(1)(B)
+- [Act 599 (2025R, HB1630)](https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2025R%2FPublic%2FACT599.pdf) — § 5-10-101(a)(1)
+- [Act 662 (2025R, SB375)](https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2025R%2FPublic%2FACT662.pdf) — § 5-10-101(a)(1)(A)
