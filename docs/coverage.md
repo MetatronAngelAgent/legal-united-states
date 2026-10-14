@@ -36,7 +36,8 @@
 3. **State regulations — 8 states still missing**, each for a reason outside our control:
    - **California** (CCR) and **New York** (NYCRR): only on Thomson Reuters' government Westlaw site
      (Cloudflare-protected, vendor terms). Route: bulk request to OAL / NY DOS, or Cornell LII
-     (CC BY-NC-SA, 10 s crawl delay — weeks for these sizes).
+     (CC BY-NC-SA, 10 s crawl delay — weeks for these sizes). `tools/lii_regs_to_okf.py
+     --state california|new-york` crawls LII politely and resumably; **not yet test-run**.
    - **New Jersey** (NJAC) and **Vermont**: only on LexisNexis (terms forbid robots; AI agents blocked).
    - **Texas** (TAC): Secretary of State portal; its robots.txt blocks AI agents and the portal's
      rules of use warn against unauthorized use. Route: Public Information Act request.
