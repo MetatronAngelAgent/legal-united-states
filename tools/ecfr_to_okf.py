@@ -222,18 +222,29 @@ def main():
         stats[f"t{n}"] = n_sec
         print(f"title {n}: {n_sec} sections/appendices", flush=True)
 
+    ref = os.path.join(a.out, "references"); os.makedirs(ref, exist_ok=True)
+    sp = os.path.join(ref, "ingest-stats-cfr.json")
+    if want and os.path.exists(sp):
+        # partial (daily) run: keep the other titles in the root index and the stats
+        prev = json.load(open(sp))
+        done_now = {n for n, _, _ in title_idx}
+        for k, v in prev.items():
+            if re.fullmatch(r"t\d+", k) and int(k[1:]) not in done_now:
+                stats[k] = v
+        title_idx = [(n, meta[n]["name"], stats.get(f"t{n}", 0)) for n in sorted(meta)
+                     if os.path.isdir(os.path.join(root, f"title-{n}"))]
     with open(os.path.join(root, "index.md"), "w", encoding="utf-8") as f:
         f.write("# Code of Federal Regulations\n\n" +
                 "\n".join(f"* [Title {n} — {nm}](title-{n}/) - {c} sections" for n, nm, c in title_idx) + "\n")
-    ref = os.path.join(a.out, "references"); os.makedirs(ref, exist_ok=True)
     rep = ["# Gaps report — Code of Federal Regulations", "", f"Run: {run_at}", "",
            f"- Titles: {len(title_idx)}", f"- Sections: {stats['sections']}",
            f"- Appendices: {stats['appendices']}", f"- Split sections: {stats['split']}",
            f"- Empty bodies: {stats['empty']}", ""]
     if gaps:
         rep += ["## Issues"] + [f"- {g}" for g in gaps]
-    open(os.path.join(ref, "gaps-cfr.md"), "w", encoding="utf-8").write("\n".join(rep) + "\n")
-    json.dump(dict(stats), open(os.path.join(ref, "ingest-stats-cfr.json"), "w"), indent=1)
+    if not want:
+        open(os.path.join(ref, "gaps-cfr.md"), "w", encoding="utf-8").write("\n".join(rep) + "\n")
+    json.dump(dict(stats), open(sp, "w"), indent=1)
     print(f"done: {stats['sections']} sections, {stats['appendices']} appendices, "
           f"{stats['files']} files, {stats['empty']} empty", flush=True)
 

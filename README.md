@@ -1,7 +1,9 @@
 # Legal United States
 
-**An open, agent-readable corpus of United States law** — statutes, regulations, court rules,
-case law and agency decisions — built from official and openly licensed sources into the
+**An open, agent-readable corpus of United States law across all three branches** — the
+legislative (statutes, bills, public laws), executive (regulations, executive orders and other
+presidential documents, the Federal Register) and judicial (case law, court rules) — built from
+official and openly licensed sources into the
 [Open Knowledge Format (OKF v0.2)](https://github.com/GoogleCloudPlatform/open-knowledge-format):
 plain Markdown files with YAML frontmatter, one legal provision per file, ready to chunk, embed
 and index for retrieval-augmented generation (RAG) and agent search.
@@ -15,7 +17,13 @@ python3 build_legal.py --dry-run                 # plan + disk / iCloud checks
 python3 build_legal.py --root ~/legal            # build everything (hours; resumable)
 python3 build_legal.py --layers usc,cfr          # or selected layers
 python3 okf_validate.py ~/legal                  # OKF conformance + link check
+sh install_daily.sh --root ~/legal               # keep it current: daily update job
 ```
+
+**Daily updates.** `update_legal.py` brings the corpus up to date every day — new executive orders
+and Federal Register issues, amended CFR titles, bill activity and new public laws, U.S. Code
+release points, newly filed court opinions — and writes a dated change report to
+`references/updates/`. See [`docs/daily-updates.md`](docs/daily-updates.md).
 
 Requirements: Python 3.9+. Mostly stdlib; `states` installs pyarrow and `gap-states` installs
 beautifulsoup4 + lxml on first use; `git` for `gap-states`. Optional `pdftotext` (poppler) for San Diego.
@@ -61,6 +69,8 @@ C.F.R. and California code section they cite (76% resolve to an exact section in
 | `court-rules` | USC appendix titles | 544 rules (FRAP, FRCP, FRE, FRCrP, FRBP) | public domain |
 | `cfr` | govinfo eCFR bulk XML | 227,286 sections + 4,101 appendices | public domain |
 | `fr` | govinfo Federal Register bulk XML | 2000–present (~20k docs/yr) | public domain |
+| `presidential` | Federal Register API (metadata) + govinfo (official text) | every Executive Order, Proclamation, Memorandum, Notice and Determination, 1994–present (~9,000) | public domain |
+| `congress` | govinfo bulk data: PLAW (USLM), BILLS, BILLSTATUS (Congress.gov/CRS) | public & private laws 113th Congress–present; every version of every bill and resolution plus status, actions and CRS summaries for the current Congress (119th: 19,640 measures, 22,967 bill texts) | public domain |
 | `ca-codes` | California Legislative Information (`pubinfo`) | Constitution + 29 codes, 162,526 sections | public domain |
 | `colorado` | Colorado OLLS official annual release (2026) | 35,392 sections + annotations | public domain |
 | `states` | Vaquill Open US Law v2026.09.1 (official-URL sourced) | 52 jurisdictions: 1.61M statute sections, 1.04M regulation sections, 104,540 AG opinions, 48,114 court rules, 11,418 constitutional provisions | text public domain; **compilation CC BY-NC 4.0** |
@@ -77,8 +87,8 @@ Counts are from verification runs; see `docs/coverage.md` for validation results
 
 ## Coverage — honestly
 
-**Complete (official sources, commercial-clean):** federal statutes, regulations, court rules,
-Constitution, Federal Register; California and Colorado statutes; San Diego's municipal code;
+**Complete (official sources, commercial-clean):** federal statutes, public laws, bills and bill
+status, regulations, presidential documents, court rules, Constitution, Federal Register; California and Colorado statutes; San Diego's municipal code;
 case law for every U.S. court (builder; full output ~200 GB, see below).
 
 **Complete for research use (non-commercial):** every other state + DC + Puerto Rico — statutes
@@ -108,7 +118,8 @@ corpus is prepared for it; see the roadmap in `docs/coverage.md`.
 ## Repository layout
 
 ```
-tools/      build_legal.py (runner) + 21 converters + okf_validate.py
+tools/      build_legal.py (runner) + 24 converters + okf_validate.py
+            update_legal.py (daily job) + install_daily.sh (launchd / cron)
 samples/    real output: full Constitution and federal court rules, plus a few concepts per layer
 docs/       coverage & validation notes, CA municipal publisher manifest
 ```

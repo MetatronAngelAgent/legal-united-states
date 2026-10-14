@@ -75,6 +75,7 @@ def main():
     ap.add_argument("--fetch", action="append", default=[], help="YYYY or YYYY-MM to download first")
     ap.add_argument("--types", default="RULE,PRORULE,NOTICE,PRESDOCU")
     ap.add_argument("--split-chars", type=int, default=6000)
+    ap.add_argument("--report", default="", help="append a JSON line per document written")
     a = ap.parse_args()
     for spec in a.fetch:
         fetch(spec, a.src)
@@ -142,6 +143,7 @@ def main():
                 ("citation", cite), ("fr_document_number", frdoc), ("publication_date", pubdate),
                 ("agency", agency), ("sub_agency", subagy), ("affects_cfr", cfr),
                 ("docket", docket), ("rin", rin),
+                ("branch", "executive"),
                 ("jurisdiction", "united-states"), ("jurisdiction_level", "federal"),
                 ("status", "stable"),
                 ("generated", {"by": TOOL, "at": run_at}),
@@ -191,27 +193,40 @@ def main():
             stats["docs"] += 1; stats[slugtype] += 1
         print(f"  {name}: cumulative {stats['docs']} docs", flush=True) if stats["issues"] % 20 == 0 else None
 
-    # indexes: root / year / month / type
-    tree = defaultdict(lambda: defaultdict(dict))
-    for (y, mo, t), items in idx.items():
+    # indexes: root / year / month / type — rebuilt from what is on disk, so a daily run that
+    # converts one issue keeps the rest of the month's documents in the index
+    def ftitle(p):
+        m = re.search(r'^title: "(.*)"$', open(p, encoding="utf-8").read(2000), re.M)
+        return m.group(1) if m else os.path.basename(p)
+    months_touched = set()
+    for (y, mo, t) in idx:
         tdir = os.path.join(root, y, mo, t)
+        items = sorted((f, ftitle(os.path.join(tdir, f))) for f in os.listdir(tdir) if f.endswith(".md") and f != "index.md")
         with open(os.path.join(tdir, "index.md"), "w", encoding="utf-8") as f:
             f.write(f"# Federal Register — {y}-{mo} — {t.replace('-', ' ').title()}s\n\n" +
-                    "\n".join(f"* [{tt}]({p})" for p, tt in sorted(items)) + "\n")
-        tree[y][mo][t] = len(items)
-    for y, months in tree.items():
-        for mo, types in months.items():
-            open(os.path.join(root, y, mo, "index.md"), "w").write(
-                f"# Federal Register — {y}-{mo}\n\n" + "\n".join(
-                    f"* [{t.replace('-', ' ').title()}s]({t}/) - {n} documents" for t, n in sorted(types.items())) + "\n")
-        open(os.path.join(root, y, "index.md"), "w").write(
-            f"# Federal Register — {y}\n\n" + "\n".join(
-                f"* [{y}-{mo}]({mo}/) - {sum(t.values())} documents" for mo, t in sorted(months.items())) + "\n")
+                    "\n".join(f"* [{tt}]({p})" for p, tt in items) + "\n")
+        months_touched.add((y, mo))
+    for y, mo in months_touched:
+        mdir = os.path.join(root, y, mo)
+        types = {t: sum(1 for f in os.listdir(os.path.join(mdir, t)) if f.endswith(".md") and f != "index.md")
+                 for t in os.listdir(mdir) if os.path.isdir(os.path.join(mdir, t))}
+        open(os.path.join(mdir, "index.md"), "w").write(
+            f"# Federal Register — {y}-{mo}\n\n" + "\n".join(
+                f"* [{t.replace('-', ' ').title()}s]({t}/) - {n} documents" for t, n in sorted(types.items())) + "\n")
+    for y in {y for y, _ in months_touched}:
+        ydir = os.path.join(root, y)
+        months = sorted(m for m in os.listdir(ydir) if os.path.isdir(os.path.join(ydir, m)))
+        open(os.path.join(ydir, "index.md"), "w").write(f"# Federal Register — {y}\n\n" + "\n".join(f"* [{y}-{mo}]({mo}/)" for mo in months) + "\n")
     os.makedirs(root, exist_ok=True)
     years = sorted(d for d in os.listdir(root) if re.match(r"^\d{4}$", d))
     open(os.path.join(root, "index.md"), "w").write("# Federal Register\n\n" + "\n".join(f"* [{y}]({y}/)" for y in years) + "\n")
     ref = os.path.join(a.out, "references"); os.makedirs(ref, exist_ok=True)
     json.dump(dict(stats), open(os.path.join(ref, "ingest-stats-federal-register.json"), "w"), indent=1)
+    if a.report:
+        with open(a.report, "a", encoding="utf-8") as rf:
+            for (y, mo, t), items in idx.items():
+                for p, tt in items:
+                    rf.write(json.dumps({"branch": "executive", "feed": "federal-register", "path": os.path.relpath(os.path.join(root, y, mo, t, p), a.out), "title": tt, "kind": t}) + "\n")
     print("done:", dict(stats), flush=True)
 
 if __name__ == "__main__":

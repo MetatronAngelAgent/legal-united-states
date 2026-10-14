@@ -214,6 +214,103 @@ def build_meta(cache, date, keep, need_clusters=None):
     return db
 
 # ---------- phase 2: opinions ----------
+def rebuild_caselaw_indexes(root, touched, courts, note):
+    # indexes: case-law / jurisdiction / court / year
+    def nk(s): return [int(x) if x.isdigit() else x for x in re.split(r"(\d+)", s)]
+    courts_touched = defaultdict(set)
+    for d in touched:
+        items = []
+        for f in sorted(os.listdir(d), key=nk):
+            if f.endswith(".md") and f != "index.md":
+                t = re.search(r'^title: "(.*)"$', open(os.path.join(d, f), encoding="utf-8").read(3000), re.M)
+                items.append(f"* [{t.group(1) if t else f}]({f})")
+        cdir = os.path.dirname(d)
+        open(os.path.join(d, "index.md"), "w", encoding="utf-8").write(
+            f"# {courts.get(os.path.basename(cdir), [None, os.path.basename(cdir)])[1]} — {os.path.basename(d)}\n\n" + "\n".join(items) + "\n")
+        courts_touched[os.path.dirname(cdir)].add(cdir)
+    for jdir, cdirs in courts_touched.items():
+        for cdir in cdirs:
+            years = sorted((y for y in os.listdir(cdir) if os.path.isdir(os.path.join(cdir, y))), key=nk)
+            cid = os.path.basename(cdir)
+            open(os.path.join(cdir, "index.md"), "w", encoding="utf-8").write(
+                f"# {courts.get(cid, [None, cid])[1]}\n\n" + "\n".join(f"* [{y}]({y}/)" for y in years) + "\n")
+        cs = sorted(c for c in os.listdir(jdir) if os.path.isdir(os.path.join(jdir, c)))
+        open(os.path.join(jdir, "index.md"), "w", encoding="utf-8").write(
+            f"# Case law — {os.path.basename(jdir).replace('-', ' ').title()}\n\n" +
+            "\n".join(f"* [{courts.get(c, [None, c])[1]}]({c}/)" for c in cs) + "\n")
+    if os.path.isdir(root):
+        open(os.path.join(root, "index.md"), "w", encoding="utf-8").write(
+            "# Case Law\n\nAll U.S. courts — federal, every state, DC, territories, tribal and military — from CourtListener "
+            f"bulk data ({note}; Free Law Project), which includes the full Caselaw Access Project. Judicial opinions are public domain.\n\n" +
+            "\n".join(f"* [{j.replace('-', ' ').title()}]({j}/)" for j in sorted(os.listdir(root)) if os.path.isdir(os.path.join(root, j))) + "\n")
+
+def write_opinion(path, ddir, o, oid, cl, meta, cites, court, jur, year, field, paras, res, run_at, split_chars,
+                  src_res, src_title, stats, touched):
+    """Write one opinion concept (shared by the bulk converter and the daily API feed)."""
+    (case_name, case_full, slug, date_filed, approx, status, judges, ccount, cblocked,
+     court_id, docket_no, dblocked, docket_id) = meta
+    body = "\n\n".join(paras)
+    otype = TYPES.get(o.get("type") or "", (o.get("type") or "").lstrip("0123456789"))
+    cite = cites[0] if cites else ""
+    cname = case_name or "Unnamed case"
+    court_name = court[1] if court else (court_id or "")
+    label = cite or (f"No. {docket_no}" if docket_no else f"CourtListener opinion {oid}")
+    title = f"{cname}, {label} ({(court[3] + ' ') if court and court[3] else ''}{year})" + (f" — {otype}" if otype else "")
+    author = U.normspace(o.get("author_str") or "") or ("Per curiam" if o.get("per_curiam") == "t" else "")
+    cited = res.links(body)
+    auth = ""
+    if cited:
+        auth = "# Cited Authorities\n\n" + "\n".join((f"- [{c}]({p})" if p else f"- {c}") for c, p in cited) + "\n\n"
+        stats["statute_citations"] += len(cited); stats["statute_citations_linked"] += sum(1 for _, p in cited if p)
+    url = f"https://www.courtlistener.com/opinion/{cl}/{slug or 'case'}/"
+    pairs = [
+        ("type", "Judicial Opinion"), ("title", title[:300]),
+        ("description", f"{court_name}, {date_filed or 'date unknown'}" + (f" ({otype})" if otype else "")),
+        ("resource", url),
+        ("tags", ["case-law", jur, court_id or "unknown-court"] + (["unpublished"] if status and status != "Published" else [])),
+        ("citation", cite), ("parallel_citations", cites[1:12]),
+        ("case_name", cname[:300]), ("case_name_full", (case_full or "")[:600]),
+        ("court", court_name), ("court_id", court_id or ""), ("docket", (docket_no or "")[:200]),
+        ("decision_date", date_filed or ""), ("date_is_approximate", ("raw", "true") if approx else None),
+        ("opinion_type", otype or "Majority / combined"), ("opinion_author", author[:120]),
+        ("judges", (judges or "")[:300]), ("precedential_status", status or ""),
+        ("cited_by_count", ("raw", str(int(ccount))) if ccount else None),
+        ("jurisdiction", jur), ("jurisdiction_level", "federal" if jur == "federal" else "tribal" if jur == "tribal" else "state"), ("branch", "judicial"),
+        ("license", "Public domain (judicial opinion); bulk data by Free Law Project / CourtListener"),
+        ("status", "stable"),
+        ("generated", {"by": TOOL, "at": run_at}),
+        ("sources", ("raw", "\n  - { id: courtlistener, resource: " + U.yq(f"{src_res} (opinion {oid}, cluster {cl}, field {field})") +
+                     ", title: " + U.yq(src_title) + ", author: " + U.yq("process:free-law-project") + " }")),
+        ("checksum", hashlib.sha256(body.encode()).hexdigest()),
+    ]
+    os.makedirs(ddir, exist_ok=True)
+    touched.add(ddir)
+    if len(body) <= split_chars * 2 or len(paras) < 2:
+        md = U.emit_frontmatter(pairs) + "\n" + auth + "# Opinion\n\n" + body + "\n"
+    else:
+        chunks, cur, sz = [], [], 0
+        for p in paras:
+            if cur and sz + len(p) > split_chars:
+                chunks.append(cur); cur, sz = [], 0
+            cur.append(p); sz += len(p) + 2
+        if cur: chunks.append(cur)
+        pdir = path[:-3]; os.makedirs(pdir, exist_ok=True)
+        lk = []
+        for k, c in enumerate(chunks, 1):
+            pb = "\n\n".join(c); pt = f"{title[:250]} (part {k} of {len(chunks)})"
+            pp = [(x, (pt if x == "title" else hashlib.sha256(pb.encode()).hexdigest() if x == "checksum" else v))
+                  for x, v in pairs] + [("part_of", f"{k} of {len(chunks)}")]
+            open(os.path.join(pdir, f"part-{k:03d}.md"), "w", encoding="utf-8").write(U.emit_frontmatter(pp) + "\n# Opinion\n\n" + pb + "\n")
+            lk.append((f"{os.path.basename(pdir)}/part-{k:03d}.md", pt))
+        md = (U.emit_frontmatter(pairs + [("parts", ("raw", str(len(chunks))))]) + "\n" + auth + "# Opinion\n\n" + paras[0] +
+              "\n\n# Parts\n\n" + "\n".join(f"- [{t}]({p})" for p, t in lk) + "\n")
+        stats["split_into_parts"] += 1
+    open(path + ".part", "w", encoding="utf-8").write(md)
+    os.replace(path + ".part", path)
+    stats["written"] += 1; stats[f"jur:{jur}"] += 1; stats[f"text:{field}"] += 1
+    return path
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cache", required=True)
@@ -291,94 +388,11 @@ def main():
         body = "\n\n".join(paras)
         if len(body) < a.min_chars:
             stats["empty_or_short_skipped"] += 1; continue
-        otype = TYPES.get(o.get("type") or "", (o.get("type") or "").lstrip("0123456789"))
-        cite = cites[0] if cites else ""
-        cname = case_name or "Unnamed case"
-        court_name = court[1] if court else (court_id or "")
-        label = cite or (f"No. {docket_no}" if docket_no else f"CourtListener opinion {oid}")
-        title = f"{cname}, {label} ({(court[3] + ' ') if court and court[3] else ''}{year})" + (f" — {otype}" if otype else "")
-        author = U.normspace(o.get("author_str") or "") or ("Per curiam" if o.get("per_curiam") == "t" else "")
-        cited = res.links(body)
-        auth = ""
-        if cited:
-            auth = "# Cited Authorities\n\n" + "\n".join((f"- [{c}]({p})" if p else f"- {c}") for c, p in cited) + "\n\n"
-            stats["statute_citations"] += len(cited); stats["statute_citations_linked"] += sum(1 for _, p in cited if p)
-        url = f"https://www.courtlistener.com/opinion/{cl}/{slug or 'case'}/"
-        pairs = [
-            ("type", "Judicial Opinion"), ("title", title[:300]),
-            ("description", f"{court_name}, {date_filed or 'date unknown'}" + (f" ({otype})" if otype else "")),
-            ("resource", url),
-            ("tags", ["case-law", jur, court_id or "unknown-court"] + (["unpublished"] if status and status != "Published" else [])),
-            ("citation", cite), ("parallel_citations", cites[1:12]),
-            ("case_name", cname[:300]), ("case_name_full", (case_full or "")[:600]),
-            ("court", court_name), ("court_id", court_id or ""), ("docket", (docket_no or "")[:200]),
-            ("decision_date", date_filed or ""), ("date_is_approximate", ("raw", "true") if approx else None),
-            ("opinion_type", otype or "Majority / combined"), ("opinion_author", author[:120]),
-            ("judges", (judges or "")[:300]), ("precedential_status", status or ""),
-            ("cited_by_count", ("raw", str(int(ccount))) if ccount else None),
-            ("jurisdiction", jur), ("jurisdiction_level", "federal" if jur == "federal" else "tribal" if jur == "tribal" else "state"),
-            ("license", "Public domain (judicial opinion); bulk data by Free Law Project / CourtListener"),
-            ("status", "stable"),
-            ("generated", {"by": TOOL, "at": run_at}),
-            ("sources", ("raw", "\n  - { id: courtlistener, resource: " + U.yq(f"{BASE}/opinions-{a.date}.csv.bz2 (opinion {oid}, cluster {cl}, field {field})") +
-                         ", title: " + U.yq(f"CourtListener bulk data {a.date}") + ", author: " + U.yq("process:free-law-project") + " }")),
-            ("checksum", hashlib.sha256(body.encode()).hexdigest()),
-        ]
-        os.makedirs(ddir, exist_ok=True)
-        touched.add(ddir)
-        if len(body) <= a.split_chars * 2 or len(paras) < 2:
-            md = U.emit_frontmatter(pairs) + "\n" + auth + "# Opinion\n\n" + body + "\n"
-        else:
-            chunks, cur, sz = [], [], 0
-            for p in paras:
-                if cur and sz + len(p) > a.split_chars:
-                    chunks.append(cur); cur, sz = [], 0
-                cur.append(p); sz += len(p) + 2
-            if cur: chunks.append(cur)
-            pdir = path[:-3]; os.makedirs(pdir, exist_ok=True)
-            lk = []
-            for k, c in enumerate(chunks, 1):
-                pb = "\n\n".join(c); pt = f"{title[:250]} (part {k} of {len(chunks)})"
-                pp = [(x, (pt if x == "title" else hashlib.sha256(pb.encode()).hexdigest() if x == "checksum" else v))
-                      for x, v in pairs] + [("part_of", f"{k} of {len(chunks)}")]
-                open(os.path.join(pdir, f"part-{k:03d}.md"), "w", encoding="utf-8").write(U.emit_frontmatter(pp) + "\n# Opinion\n\n" + pb + "\n")
-                lk.append((f"{os.path.basename(pdir)}/part-{k:03d}.md", pt))
-            md = (U.emit_frontmatter(pairs + [("parts", ("raw", str(len(chunks))))]) + "\n" + auth + "# Opinion\n\n" + paras[0] +
-                  "\n\n# Parts\n\n" + "\n".join(f"- [{t}]({p})" for p, t in lk) + "\n")
-            stats["split_into_parts"] += 1
-        open(path + ".part", "w", encoding="utf-8").write(md)
-        os.replace(path + ".part", path)
-        stats["written"] += 1; stats[f"jur:{jur}"] += 1; stats[f"text:{field}"] += 1
+        write_opinion(path, ddir, o, oid, cl, meta, cites, court, jur, year, field, paras, res, run_at, a.split_chars,
+                      f"{BASE}/opinions-{a.date}.csv.bz2", f"CourtListener bulk data {a.date}", stats, touched)
     stats["read"] = n
 
-    # indexes: case-law / jurisdiction / court / year
-    def nk(s): return [int(x) if x.isdigit() else x for x in re.split(r"(\d+)", s)]
-    courts_touched = defaultdict(set)
-    for d in touched:
-        items = []
-        for f in sorted(os.listdir(d), key=nk):
-            if f.endswith(".md") and f != "index.md":
-                t = re.search(r'^title: "(.*)"$', open(os.path.join(d, f), encoding="utf-8").read(3000), re.M)
-                items.append(f"* [{t.group(1) if t else f}]({f})")
-        cdir = os.path.dirname(d)
-        open(os.path.join(d, "index.md"), "w", encoding="utf-8").write(
-            f"# {courts.get(os.path.basename(cdir), [None, os.path.basename(cdir)])[1]} — {os.path.basename(d)}\n\n" + "\n".join(items) + "\n")
-        courts_touched[os.path.dirname(cdir)].add(cdir)
-    for jdir, cdirs in courts_touched.items():
-        for cdir in cdirs:
-            years = sorted((y for y in os.listdir(cdir) if os.path.isdir(os.path.join(cdir, y))), key=nk)
-            cid = os.path.basename(cdir)
-            open(os.path.join(cdir, "index.md"), "w", encoding="utf-8").write(
-                f"# {courts.get(cid, [None, cid])[1]}\n\n" + "\n".join(f"* [{y}]({y}/)" for y in years) + "\n")
-        cs = sorted(c for c in os.listdir(jdir) if os.path.isdir(os.path.join(jdir, c)))
-        open(os.path.join(jdir, "index.md"), "w", encoding="utf-8").write(
-            f"# Case law — {os.path.basename(jdir).replace('-', ' ').title()}\n\n" +
-            "\n".join(f"* [{courts.get(c, [None, c])[1]}]({c}/)" for c in cs) + "\n")
-    if os.path.isdir(root):
-        open(os.path.join(root, "index.md"), "w", encoding="utf-8").write(
-            "# Case Law\n\nAll U.S. courts — federal, every state, DC, territories, tribal and military — from CourtListener "
-            f"bulk data ({a.date}; Free Law Project), which includes the full Caselaw Access Project. Judicial opinions are public domain.\n\n" +
-            "\n".join(f"* [{j.replace('-', ' ').title()}]({j}/)" for j in sorted(os.listdir(root)) if os.path.isdir(os.path.join(root, j))) + "\n")
+    rebuild_caselaw_indexes(root, touched, courts, a.date)
     ref = os.path.join(a.out, "references"); os.makedirs(ref, exist_ok=True)
     json.dump({"date": a.date, "scope": sorted(scope), "limit": a.limit, "stats": dict(stats)},
               open(os.path.join(ref, "ingest-stats-case-law-courtlistener.json"), "w"), indent=1)

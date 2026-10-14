@@ -17,7 +17,18 @@
 | State regulations (new) | Louisiana 26,675 sections from 154 official .docx files (TOC lists 26,743 §-entries; the difference is reserved/duplicate TOC lines); Missouri 11,156 rules from 1,609 chapter PDFs (every rule heading found in the PDFs written, except TOC-only rescinded entries); Rhode Island 11,901 sections from 1,131 active Parts; Massachusetts 17,807 sections from 1,491 regulations (18 regulations had no identifiable current text); Hawaii 7,141 sections from 557 chapter PDFs across 19 departments — 101 scanned chapters without a text layer are skipped (25 OCR'd so far; `--ocr` does the rest). Multi-column PDF pages are cut at their gutters so text reads in order |
 | Arkansas amendments | Code Sections Amended tables for 12 sessions (2021–2026): 6,386 sections changed → 4,993 snapshot sections flagged with the official Acts, 374 repealed since, 1,175 new sections listed in `arkansas/statutes/changes-since-snapshot.md` |
 | Case law (CourtListener) | Sample of the first 20,000 rows of the 2026-09-30 opinions file: 19,045 written, 590 skipped as privacy-blocked by CourtListener, 365 skipped as empty/one-line; 26 jurisdictions represented; OKF conformance 0 violations |
+| Presidential documents (new) | Test windows Sep 15 – Oct 14, 2026 (23 docs) and Mar 1–20, 1995 (12 docs): every document listed by the Federal Register API written, with text from govinfo's official issue (GPO's NUL padding and page markers stripped); EO numbers, signing dates, presidents and disposition notes ("Revokes: EO 13508") carried into frontmatter |
+| Congress (new) | 119th Congress full load: 120 public/private laws, 19,640 bill-status records, 22,967 bill-text versions (3 files skipped: unparseable type codes), 667 MB, ~2.5 min from govinfo bulk zips; next run with no upstream change fetched 0 files in 23 s |
+| Daily job (new) | `update_legal.py` end-to-end on a scratch corpus: 4 Federal Register issues (holiday skipped), 28 presidential documents, simulated CFR amendments (titles 1, 3: rebuilt, swapped, diffed), simulated U.S. Code release (78,259 concepts built; identical re-release diffed to 0 changes), Congress initial + incremental load; 0 OKF violations. The CourtListener daily feed was tested against a mocked API (no token in this environment) |
 | Whole bundle | OKF §11 conformance: 0 violations across 1.58M federal concept files, 3.66M files after adding all states, and the gap-state + case-law runs (170,871 files) |
+
+## Coverage by branch of government
+
+| Branch | Federal | California | Other states |
+|---|---|---|---|
+| **Legislative** | U.S. Code (current release point), public & private laws 113th Congress–present, every bill version + status/actions/CRS summaries for the current Congress | 29 codes + Constitution (rebuilt weekly) | statutes via `states` (non-commercial) / official builds for CO; AR, GA, MS, TN snapshots |
+| **Executive** | CFR (amended titles rebuilt daily), Federal Register 2000–present (daily), presidential documents 1994–present (daily), agency decisions to 2022 | — (CCR not available, see below) | regulations for 39 jurisdictions via `states` + LA, MO, RI, MA, HI official; AG opinions (42) |
+| **Judicial** | all federal courts' opinions (quarterly bulk + daily API), FRAP/FRCP/FRE/FRCrP/FRBP | all CA courts' opinions | all state courts' opinions; court rules for 46 states via `states` |
 
 ## What is still incomplete
 
@@ -59,6 +70,15 @@
 6. **Agency decisions after 2022** (Pile of Law ends there); the Vaquill federal files
    (board decisions, IRS written determinations, etc.) could extend this, non-commercially.
 7. **Federal Register** was verified on 2026; the runner builds 2000–present (`--fr-from`).
+8. **State legislative and executive activity is not daily.** Pending bills in state legislatures,
+   session laws and governors' executive orders have no free all-state bulk feed; Open States (API
+   key) covers bills. Not built yet.
+9. **Older federal material:** bills before the current Congress (govinfo BILLS goes back to the
+   113th; `govinfo_leg_to_okf.py --collections bills,billstatus --congress 113-118` builds them),
+   public laws before the 113th Congress (Statutes at Large volumes), executive orders before 1994,
+   the Congressional Record, and OLC opinions after 2022.
+10. **Daily court opinions need a CourtListener API token** (free); without one the daily report says
+    the feed was skipped and case law only advances with each quarterly snapshot.
 
 ## Rejected sources
 

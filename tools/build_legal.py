@@ -26,6 +26,10 @@ Layers (run in this order; later ones link to earlier ones):
                 Hawaii (HAR, per department; OCR for scanned chapters)          ~0.6 GB
   san-diego     San Diego Municipal Code (City Clerk PDFs; needs pdftotext)  ~40 MB
   ca-manifest   Every CA city/county -> municipal code publisher             ~1 MB
+  presidential  Executive branch: Executive Orders, Proclamations, Memoranda, Notices and
+                Determinations, 1994-present (Federal Register API + govinfo text)  ~0.2 GB
+  congress      Legislative branch: public/private laws 113th Congress-present, plus every bill
+                version and Congress.gov bill status for the current Congress (govinfo bulk) ~2 GB
   fr            Federal Register, 2000–present (govinfo bulk XML)            ~15 GB
   agency        Agency decisions/opinions/guidance (Pile of Law, CC BY-NC-SA) ~6 GB
   bva           Board of Veterans' Appeals decisions (Pile of Law)           ~15 GB
@@ -44,11 +48,12 @@ Usage:
 import argparse, datetime as dt, json, os, platform, re, shutil, subprocess, sys, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 UA = "OKF-LawCorpus/1.0 (open legal-knowledge research; contact " + os.environ.get("LEGAL_US_CONTACT", "see github.com/MetatronAngelAgent/legal-united-states") + ")"
 ORDER = ["constitution", "usc", "court-rules", "cfr", "ca-codes", "colorado", "states", "gap-states", "state-regs", "san-diego", "ca-manifest",
-         "fr", "agency", "bva", "case-law", "eval"]
+         "presidential", "congress", "fr", "agency", "bva", "case-law", "eval"]
 EST_GB = {"constitution": 0.01, "usc": 1.0, "court-rules": 0.01, "cfr": 2.0, "ca-codes": 0.8,
-          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 200, "eval": 0.1, "colorado": 0.3, "states": 14, "gap-states": 1.0, "case-law-cap": 24, "state-regs": 0.6}
+          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 200, "eval": 0.1, "colorado": 0.3, "states": 14, "gap-states": 1.0, "case-law-cap": 24, "state-regs": 0.6, "presidential": 0.2, "congress": 2.0}
 DL_GB = {"state-regs": 1.5, "gap-states": 0.7, "states": 0.3, "colorado": 0.1, "usc": 0.2, "cfr": 1.0, "ca-codes": 1.3, "fr": 1.0, "agency": 1.0, "bva": 2.3, "case-law": 4.0, "case-law-cap": 0.4}  # peak cache
 
 def log(msg):
@@ -116,9 +121,21 @@ def usc_zip(cache, a):
 
 def L_usc(root, cache, a):
     run(["uslm_to_okf.py", "--dump", usc_zip(cache, a), "--out", root])
+    return {"release": a.usc_release}
 
 def L_court_rules(root, cache, a):
     run(["uslm_rules_to_okf.py", "--dump", usc_zip(cache, a), "--out", root])
+    return {"release": a.usc_release}
+
+def L_presidential(root, cache, a):
+    run(["presdocs_to_okf.py", "--out", root, "--from", "1994-01-01"])
+
+def L_congress(root, cache, a):
+    import govinfo_leg_to_okf as G
+    cur = G.current_congress()
+    run(["govinfo_leg_to_okf.py", "--out", root, "--collections", "plaw", "--congress", f"113-{cur}"])
+    run(["govinfo_leg_to_okf.py", "--out", root, "--collections", "billstatus,bills", "--congress", str(cur)])
+    return {"congress": cur}
 
 def L_cfr(root, cache, a):
     d = os.path.join(cache, "ecfr")
@@ -208,6 +225,7 @@ def L_case_law(root, cache, a):
     # Opinions (~55 GB compressed) are streamed, never stored, unless --keep-cache. Resumable.
     run(["cl_to_okf.py", "--cache", os.path.join(cache, "courtlistener"), "--out", root,
          "--scope", a.caselaw_scope, "--date", a.cl_date] + (["--keep"] if a.keep_cache else []))
+    return {"snapshot": a.cl_date, "scope": a.caselaw_scope}
 
 def L_case_law_cap(root, cache, a):
     """Older alternative: Caselaw Access Project only (to 2018). Not in the default order."""
@@ -238,7 +256,7 @@ def L_eval(root, cache, a):
 LAYERS = {"colorado": L_colorado, "states": L_states, "constitution": L_constitution, "usc": L_usc, "court-rules": L_court_rules, "cfr": L_cfr,
           "ca-codes": L_ca_codes, "san-diego": L_san_diego, "ca-manifest": L_ca_manifest, "fr": L_fr,
           "agency": L_agency, "bva": L_bva, "case-law": L_case_law, "case-law-cap": L_case_law_cap, "eval": L_eval,
-          "gap-states": L_gap_states, "state-regs": L_state_regs}
+          "gap-states": L_gap_states, "state-regs": L_state_regs, "presidential": L_presidential, "congress": L_congress}
 
 # ----------------------------------------------------------------------------- bundle root
 TITLES = {"federal": "Federal law", "california": "California", "case-law": "Case law",
@@ -269,14 +287,17 @@ def write_root(root, done):
     fed = os.path.join(root, "federal")
     if os.path.isdir(fed):
         names = {"usc": "United States Code", "constitution": "Constitution", "court-rules": "Federal court rules",
+                 "executive": "Executive branch — presidential documents", "legislative": "Legislative branch — bills and public laws",
                  "cfr": "Code of Federal Regulations", "federal-register": "Federal Register",
                  "agency": "Agency decisions, opinions & guidance"}
         sub = sorted(d for d in os.listdir(fed) if os.path.isdir(os.path.join(fed, d)))
         open(os.path.join(fed, "index.md"), "w", encoding="utf-8").write(
             "# Federal law\n\n" + "\n".join(f"* [{names.get(d, d)}]({d}/)" for d in sub) + "\n")
     lines = ['---', 'okf_version: "0.2"', '---', '', '# Legal — U.S. law knowledge base', '',
-             "Statutes, regulations, court rules, case law and agency decisions as OKF concepts.",
-             "Built by `references/tools/build_legal.py`; per-layer reports in `references/`.", '']
+             "All three branches as OKF concepts: statutes, bills and public laws (legislative); regulations, "
+             "presidential documents and the Federal Register (executive); case law and court rules (judicial).",
+             "Built by `references/tools/build_legal.py`, kept current daily by `update_legal.py`; "
+             "per-layer reports in `references/`, daily change reports in `references/updates/`.", '']
     lines += [f"* [{TITLES.get(d, d)}]({d}/)" for d in kids if d != "references"]
     lines += ["", f"* [{TITLES['references']}](references/)"] if "references" in kids else []
     open(os.path.join(root, "index.md"), "w", encoding="utf-8").write("\n".join(lines) + "\n")
