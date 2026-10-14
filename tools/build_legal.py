@@ -28,7 +28,7 @@ Layers (run in this order; later ones link to earlier ones):
   bva           Board of Veterans' Appeals decisions (Pile of Law)           ~15 GB
   case-law      ALL U.S. case law — every federal, state, territorial, tribal and military
                 court, 1658-present (CourtListener quarterly bulk data, public domain)
-                ~CASELAW_GB GB for --caselaw-scope all (default); e.g. federal,california for less
+                ~200 GB for --caselaw-scope all (default); e.g. federal,california for less
   eval          LegalBench evaluation set (CC BY 4.0)                        ~80 MB
 
 Usage:
@@ -45,7 +45,7 @@ UA = "OKF-LawCorpus/1.0 (open legal-knowledge research; contact " + os.environ.g
 ORDER = ["constitution", "usc", "court-rules", "cfr", "ca-codes", "colorado", "states", "gap-states", "san-diego", "ca-manifest",
          "fr", "agency", "bva", "case-law", "eval"]
 EST_GB = {"constitution": 0.01, "usc": 1.0, "court-rules": 0.01, "cfr": 2.0, "ca-codes": 0.8,
-          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 24, "eval": 0.1, "colorado": 0.3, "states": 14, "gap-states": 1.0, "case-law-cap": 24}
+          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 200, "eval": 0.1, "colorado": 0.3, "states": 14, "gap-states": 1.0, "case-law-cap": 24}
 DL_GB = {"gap-states": 0.7, "states": 0.3, "colorado": 0.1, "usc": 0.2, "cfr": 1.0, "ca-codes": 1.3, "fr": 1.0, "agency": 1.0, "bva": 2.3, "case-law": 4.0, "case-law-cap": 0.4}  # peak cache
 
 def log(msg):
