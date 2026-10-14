@@ -57,6 +57,8 @@ C.F.R. and California code section they cite (76% resolve to an exact section in
 | `cfr` | govinfo eCFR bulk XML | 227,286 sections + 4,101 appendices | public domain |
 | `fr` | govinfo Federal Register bulk XML | 2000–present (~20k docs/yr) | public domain |
 | `ca-codes` | California Legislative Information (`pubinfo`) | Constitution + 29 codes, 162,526 sections | public domain |
+| `colorado` | Colorado OLLS official annual release (2026) | 35,392 sections + annotations | public domain |
+| `states` | Vaquill Open US Law v2026.09.1 (official-URL sourced) | 52 jurisdictions: 1.61M statute sections, 1.04M regulation sections, 104,540 AG opinions, 48,114 court rules, 11,418 constitutional provisions | text public domain; **compilation CC BY-NC 4.0** |
 | `san-diego` | San Diego City Clerk | 6,012 sections | public domain |
 | `ca-manifest` | Census + code-publisher directories | all 482 CA cities + 58 counties → publisher | metadata |
 | `case-law` | Caselaw Access Project (Common Pile) | CA + federal by default; `--caselaw-scope all` for every state | public domain |
@@ -68,13 +70,19 @@ Counts are from verification runs; see `docs/coverage.md` for validation results
 
 ## Coverage — honestly
 
-**Complete:** federal statutes, regulations, court rules, Constitution, Federal Register;
-California statutes and Constitution; San Diego's municipal code.
+**Complete (official sources, commercial-clean):** federal statutes, regulations, court rules,
+Constitution, Federal Register; California and Colorado statutes; San Diego's municipal code.
 
-**Not yet:** the other 49 states' codes, constitutions and regulations (each needs its own
-official-source converter); California regulations (CCR) and most city codes (behind
-commercial-publisher terms — `docs/ca-municipal-manifest.csv` maps every CA city's route);
-case law after ~2018 (CourtListener converter planned); agency decisions after 2022.
+**Complete for research use (non-commercial):** every other state + DC + Puerto Rico — statutes
+(47 jurisdictions), constitutions, regulations (39), court rules (46) and attorney-general opinions
+(42) — via the `states` layer. Every record links to its official source URL. For commercial use,
+license from Vaquill or replace state by state with official-source builds (`docs/state-sources.md`).
+
+**Gaps:** statutes for Arkansas, Georgia, Mississippi and Tennessee (official text sits behind
+LexisNexis public-access portals or an exclusive publisher; available in Vaquill's CC BY v2026.07
+snapshot on Hugging Face, which requires accepting its access terms); regulations for 13 states
+(incl. TX, NY, NJ); California regulations (CCR) and most city codes (commercial-publisher terms —
+`docs/ca-municipal-manifest.csv` maps every CA city); case law after ~2018; agency decisions after 2022.
 
 **Not included here:** the retrieval layer itself (embedding index + MCP query server) — the
 corpus is prepared for it; see the roadmap in `docs/coverage.md`.

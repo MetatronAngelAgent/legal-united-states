@@ -16,6 +16,9 @@ Layers (run in this order; later ones link to earlier ones):
   court-rules   FRAP, FRCP, FRE, FRCrP, FRBP (USC appendix titles)           ~3 MB
   cfr           Code of Federal Regulations (govinfo eCFR bulk XML)          ~1.6 GB
   ca-codes      California Constitution + 29 codes (leginfo pubinfo)         ~0.6 GB
+  colorado      Colorado Revised Statutes, official OLLS annual release      ~0.3 GB
+  states        All other states + DC + PR: statutes, constitutions, regs,
+                court rules, AG opinions (Vaquill Open US Law, CC BY-NC 4.0) ~14 GB
   san-diego     San Diego Municipal Code (City Clerk PDFs; needs pdftotext)  ~40 MB
   ca-manifest   Every CA city/county -> municipal code publisher             ~1 MB
   fr            Federal Register, 2000–present (govinfo bulk XML)            ~15 GB
@@ -35,11 +38,11 @@ import argparse, datetime as dt, json, os, platform, re, shutil, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 UA = "OKF-LawCorpus/1.0 (open legal-knowledge research; contact " + os.environ.get("LEGAL_US_CONTACT", "see github.com/MetatronAngelAgent/legal-united-states") + ")"
-ORDER = ["constitution", "usc", "court-rules", "cfr", "ca-codes", "san-diego", "ca-manifest",
+ORDER = ["constitution", "usc", "court-rules", "cfr", "ca-codes", "colorado", "states", "san-diego", "ca-manifest",
          "fr", "agency", "bva", "case-law", "eval"]
 EST_GB = {"constitution": 0.01, "usc": 1.0, "court-rules": 0.01, "cfr": 2.0, "ca-codes": 0.8,
-          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 24, "eval": 0.1}
-DL_GB = {"usc": 0.2, "cfr": 1.0, "ca-codes": 1.3, "fr": 1.0, "agency": 1.0, "bva": 2.3, "case-law": 0.4}  # peak cache
+          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 24, "eval": 0.1, "colorado": 0.3, "states": 14}
+DL_GB = {"states": 0.3, "colorado": 0.1, "usc": 0.2, "cfr": 1.0, "ca-codes": 1.3, "fr": 1.0, "agency": 1.0, "bva": 2.3, "case-law": 0.4}  # peak cache
 
 def log(msg):
     print(f"[{dt.datetime.now():%H:%M:%S}] {msg}", flush=True)
@@ -127,6 +130,19 @@ def L_ca_codes(root, cache, a):
     if not a.keep_cache:
         os.remove(fn)
 
+def L_colorado(root, cache, a):
+    run(["co_crs_to_okf.py", "--year", str(dt.date.today().year), "--cache", os.path.join(cache, "co"), "--out", root])
+
+def L_states(root, cache, a):
+    log("  NOTE: state layer from Vaquill Open US Law (compilation CC BY-NC 4.0 = non-commercial). "
+        "Each concept is tagged; see references/tools/README.md for commercial-clean alternatives.")
+    try:
+        import pyarrow  # noqa
+    except ImportError:
+        subprocess.run([sys.executable, "-m", "pip", "install", "--user", "-q", "pyarrow"])
+    run(["vaquill_to_okf.py", "--cache", os.path.join(cache, "vaquill"), "--out", root] +
+        (["--keep-cache"] if a.keep_cache else []))
+
 def L_san_diego(root, cache, a):
     if not shutil.which("pdftotext"):
         log("  SKIP san-diego: needs pdftotext — install with:  brew install poppler   then rerun --layers san-diego")
@@ -191,7 +207,7 @@ def L_eval(root, cache, a):
         "# Evaluation sets\n\n* [About LegalBench](about-legalbench.md) - what it is and how to use it\n"
         "* [LegalBench dataset](legalbench/README.md) - 162 legal-reasoning tasks (train/test TSVs)\n")
 
-LAYERS = {"constitution": L_constitution, "usc": L_usc, "court-rules": L_court_rules, "cfr": L_cfr,
+LAYERS = {"colorado": L_colorado, "states": L_states, "constitution": L_constitution, "usc": L_usc, "court-rules": L_court_rules, "cfr": L_cfr,
           "ca-codes": L_ca_codes, "san-diego": L_san_diego, "ca-manifest": L_ca_manifest, "fr": L_fr,
           "agency": L_agency, "bva": L_bva, "case-law": L_case_law, "eval": L_eval}
 

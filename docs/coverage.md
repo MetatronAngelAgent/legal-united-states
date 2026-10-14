@@ -12,7 +12,9 @@
 | San Diego | 6,012 sections; independent audit against the source PDFs: 0 missing, 0 empty, 0 duplicates |
 | Agency (Pile of Law) | 179,422 documents after dedup. Source fixes: FTC texts stored as Python byte literals (decoded); `taxrulings` is actually 78% IRS written determinations + 22% Tax Court opinions (split into separate folders); redaction-heavy IRS rulings kept (an early readability filter would have dropped 12,141 of them) |
 | Case law | Two-shard test: 37,960 opinions (CA 23,741 + federal 14,219); 29,669 statute citations extracted, 22,569 linked to an exact section |
-| Whole bundle | OKF §11 conformance: 0 violations across 1.58M concept files |
+| Colorado | 35,392 sections from the official 2026 OLLS release; 340 repealed stubs kept as deprecated; 518 long annotation blocks split into companion concepts |
+| States (Vaquill) | 2,825,039 / 2,825,039 rows written across 52 jurisdictions; 0 records without an official source URL; 0 empty; 286,739 not-in-force kept as deprecated; breadcrumb-based hierarchy (fixed 12,505 cross-code collisions found in testing) |
+| Whole bundle | OKF §11 conformance: 0 violations across 1.58M federal concept files, and again across 3.66M files after adding all states (21 GB) |
 
 ## Rejected sources
 
@@ -25,5 +27,5 @@
 1. **Retrieval layer** — hybrid index (embeddings + BM25) with frontmatter filters; MCP server exposing `search_law`, `get_section(citation)`, `cites(citation)`, `cited_by(citation)`; LegalBench evaluation with vs. without retrieval.
 2. **All-state case law** — `--caselaw-scope all` (~64 GB).
 3. **Current case law** — CourtListener bulk opinions (post-2018).
-4. **State codes, largest first** — official bulk sources (e.g. Texas, New York, Florida), one converter per state, same frontmatter contract.
+4. **Commercial-clean state codes** — replace the CC BY-NC `states` layer state by state from official sources, bulk/API states first (see `state-sources.md`); then the four statute gaps (AR, GA, MS, TN). One converter per state, same frontmatter contract.
 5. **Self-publishing cities** — same pattern as San Diego, prioritised by population from the manifest.
