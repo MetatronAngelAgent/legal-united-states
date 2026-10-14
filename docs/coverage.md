@@ -1,4 +1,4 @@
-# Coverage, validation and roadmap
+# Coverage, validation and what is still incomplete
 
 ## Validation results (verification runs, October 2026)
 
@@ -11,21 +11,46 @@
 | Federal Register | 2026 test year: 196 issues, 20,396 documents; page citations verified 112/112 against the XML |
 | San Diego | 6,012 sections; independent audit against the source PDFs: 0 missing, 0 empty, 0 duplicates |
 | Agency (Pile of Law) | 179,422 documents after dedup. Source fixes: FTC texts stored as Python byte literals (decoded); `taxrulings` is actually 78% IRS written determinations + 22% Tax Court opinions (split into separate folders); redaction-heavy IRS rulings kept (an early readability filter would have dropped 12,141 of them) |
-| Case law | Two-shard test: 37,960 opinions (CA 23,741 + federal 14,219); 29,669 statute citations extracted, 22,569 linked to an exact section |
 | Colorado | 35,392 sections from the official 2026 OLLS release; 340 repealed stubs kept as deprecated; 518 long annotation blocks split into companion concepts |
 | States (Vaquill) | 2,825,039 / 2,825,039 rows written across 52 jurisdictions; 0 records without an official source URL; 0 empty; 286,739 not-in-force kept as deprecated; breadcrumb-based hierarchy (fixed 12,505 cross-code collisions found in testing) |
-| Whole bundle | OKF §11 conformance: 0 violations across 1.58M federal concept files, and again across 3.66M files after adding all states (21 GB) |
+| Gap states (AR, GA, MS, TN) | 128,476 sections (AR 37,462 · GA 29,074 · MS 27,844 · TN 34,096), every section heading in each release converted. 1,147 Arkansas sections whose text the standardized HTML had dropped were recovered from Public.Resource.Org's own conversion of the same release. 92 sections still have no text in any available source (AR 8, GA 19, MS 5, TN 60) and say so. Sampled cross-references: 17,650 / 17,650 resolve to a section file |
+| Case law (CourtListener) | Sample of the first 20,000 rows of the 2026-09-30 opinions file: 19,045 written, 590 skipped as privacy-blocked by CourtListener, 365 skipped as empty/one-line; 26 jurisdictions represented; OKF conformance 0 violations |
+| Whole bundle | OKF §11 conformance: 0 violations across 1.58M federal concept files, 3.66M files after adding all states, and the gap-state + case-law runs (170,871 files) |
+
+## What is still incomplete
+
+1. **Commercial-clean current statutes for 45 states + DC + PR.** These come from the `states` layer
+   (Vaquill, current, official-URL sourced, but CC BY-NC 4.0 — non-commercial). Official-source
+   replacements exist only for California and Colorado so far; `state-sources.md` lists each
+   state's official bulk channel for building the rest.
+2. **Arkansas, Georgia, Mississippi and Tennessee statutes are snapshots, not current law.**
+   Arkansas through 2020-11-06, Georgia 2022-11, Mississippi 2020-07-08 (Mississippi ended its
+   electronic edition), Tennessee 2021-05-21. Current text is only on LexisNexis public-access
+   portals whose terms forbid bulk copying. Every concept carries `currency` and `stale_after`.
+   Vaquill's current release has no statutes for these four states either.
+3. **State regulations for 13 jurisdictions:** AZ, CA, HI, IN, LA, MA, MO, NJ, NY, RI, TN, TX, VT.
+4. **Case law is built by the runner, not shipped.** All ~12 million opinions (estimate from the
+   compressed file) come to ~200 GB / ~25 million files and ~1–2 days of processing; validated here
+   on a 20,000-opinion sample. Within CourtListener itself: state *trial* courts are thin (most do
+   not publish opinions), and opinions CourtListener has blocked for privacy are skipped (~3%).
+5. **Municipal codes:** only San Diego. The other 481 California cities, 58 counties and every
+   other state's cities publish through commercial code publishers whose terms prohibit bulk
+   copying; the route is licensing, self-publishing cities, or public-records requests.
+6. **Agency decisions after 2022** (Pile of Law ends there); the Vaquill federal files
+   (board decisions, IRS written determinations, etc.) could extend this, non-commercially.
+7. **Federal Register** was verified on 2026; the runner builds 2000–present (`--fr-from`).
 
 ## Rejected sources
 
 - **Pile of Law `state_code`** — 2009–2014 snapshots, no state labels, unattributed origin. Unsafe to serve as current law.
 - **ecfr.gov bulk API** — disallowed by its robots.txt; the same data comes from govinfo bulk data.
-- **Municipal code publishers** (Municode/CivicPlus, ICC: American Legal, General Code, Code Publishing, Quality Code) — terms prohibit bulk copying; route is licensing, self-publishing cities, or CPRA requests.
+- **law.resource.org** — its robots.txt asks AI crawlers to stay out; the same Public.Resource.Org releases are taken from GitHub (UniCourt) and archive.org instead.
+- **Municipal code publishers** (Municode/CivicPlus, ICC: American Legal, General Code, Code Publishing, Quality Code) — terms prohibit bulk copying.
+- **LexisNexis state-code portals** (AR, GA, MS, TN, and others) — terms prohibit bulk copying; anti-bot protected.
 
 ## Roadmap
 
 1. **Retrieval layer** — hybrid index (embeddings + BM25) with frontmatter filters; MCP server exposing `search_law`, `get_section(citation)`, `cites(citation)`, `cited_by(citation)`; LegalBench evaluation with vs. without retrieval.
-2. **All-state case law** — `--caselaw-scope all` (~64 GB).
-3. **Current case law** — CourtListener bulk opinions (post-2018).
-4. **Commercial-clean state codes** — replace the CC BY-NC `states` layer state by state from official sources, bulk/API states first (see `state-sources.md`); then the four statute gaps (AR, GA, MS, TN). One converter per state, same frontmatter contract.
-5. **Self-publishing cities** — same pattern as San Diego, prioritised by population from the manifest.
+2. **Commercial-clean state codes** — replace the CC BY-NC `states` layer state by state from official sources, bulk/API states first (see `state-sources.md`). One converter per state, same frontmatter contract.
+3. **Citation graph for case law** — CourtListener's `citation-map` file links every opinion to the opinions it cites.
+4. **Self-publishing cities** — same pattern as San Diego, prioritised by population from the manifest.

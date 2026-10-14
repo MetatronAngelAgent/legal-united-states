@@ -19,30 +19,34 @@ Layers (run in this order; later ones link to earlier ones):
   colorado      Colorado Revised Statutes, official OLLS annual release      ~0.3 GB
   states        All other states + DC + PR: statutes, constitutions, regs,
                 court rules, AG opinions (Vaquill Open US Law, CC BY-NC 4.0) ~14 GB
+  gap-states    Arkansas, Georgia, Mississippi, Tennessee statutes — newest public-domain
+                bulk releases (Public.Resource.Org/UniCourt on GitHub; 2020-2022 snapshots) ~1 GB
   san-diego     San Diego Municipal Code (City Clerk PDFs; needs pdftotext)  ~40 MB
   ca-manifest   Every CA city/county -> municipal code publisher             ~1 MB
   fr            Federal Register, 2000–present (govinfo bulk XML)            ~15 GB
   agency        Agency decisions/opinions/guidance (Pile of Law, CC BY-NC-SA) ~6 GB
   bva           Board of Veterans' Appeals decisions (Pile of Law)           ~15 GB
-  case-law      Case law, CA + federal (Caselaw Access Project, public domain) ~22 GB
+  case-law      ALL U.S. case law — every federal, state, territorial, tribal and military
+                court, 1658-present (CourtListener quarterly bulk data, public domain)
+                ~CASELAW_GB GB for --caselaw-scope all (default); e.g. federal,california for less
   eval          LegalBench evaluation set (CC BY 4.0)                        ~80 MB
 
 Usage:
   python3 build_legal.py --dry-run                       # plan, disk + iCloud checks
   python3 build_legal.py                                 # everything (hours; resumable)
   python3 build_legal.py --layers usc,cfr,case-law       # selected layers
-  python3 build_legal.py --fr-from 2020 --caselaw-scope all
+  python3 build_legal.py --fr-from 2020 --caselaw-scope federal,california
   python3 build_legal.py --force usc                     # rebuild a finished layer
 """
 import argparse, datetime as dt, json, os, platform, re, shutil, subprocess, sys, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 UA = "OKF-LawCorpus/1.0 (open legal-knowledge research; contact " + os.environ.get("LEGAL_US_CONTACT", "see github.com/MetatronAngelAgent/legal-united-states") + ")"
-ORDER = ["constitution", "usc", "court-rules", "cfr", "ca-codes", "colorado", "states", "san-diego", "ca-manifest",
+ORDER = ["constitution", "usc", "court-rules", "cfr", "ca-codes", "colorado", "states", "gap-states", "san-diego", "ca-manifest",
          "fr", "agency", "bva", "case-law", "eval"]
 EST_GB = {"constitution": 0.01, "usc": 1.0, "court-rules": 0.01, "cfr": 2.0, "ca-codes": 0.8,
-          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 24, "eval": 0.1, "colorado": 0.3, "states": 14}
-DL_GB = {"states": 0.3, "colorado": 0.1, "usc": 0.2, "cfr": 1.0, "ca-codes": 1.3, "fr": 1.0, "agency": 1.0, "bva": 2.3, "case-law": 0.4}  # peak cache
+          "san-diego": 0.1, "ca-manifest": 0.01, "fr": 16, "agency": 7, "bva": 16, "case-law": 24, "eval": 0.1, "colorado": 0.3, "states": 14, "gap-states": 1.0, "case-law-cap": 24}
+DL_GB = {"gap-states": 0.7, "states": 0.3, "colorado": 0.1, "usc": 0.2, "cfr": 1.0, "ca-codes": 1.3, "fr": 1.0, "agency": 1.0, "bva": 2.3, "case-law": 4.0, "case-law-cap": 0.4}  # peak cache
 
 def log(msg):
     print(f"[{dt.datetime.now():%H:%M:%S}] {msg}", flush=True)
@@ -143,6 +147,10 @@ def L_states(root, cache, a):
     run(["vaquill_to_okf.py", "--cache", os.path.join(cache, "vaquill"), "--out", root] +
         (["--keep-cache"] if a.keep_cache else []))
 
+def L_gap_states(root, cache, a):
+    log("  NOTE: newest public-domain releases are 2020-2022 snapshots; every concept carries `currency`/`stale_after`.")
+    run(["pro_codes_to_okf.py", "--cache", os.path.join(cache, "pro-codes"), "--out", root])
+
 def L_san_diego(root, cache, a):
     if not shutil.which("pdftotext"):
         log("  SKIP san-diego: needs pdftotext — install with:  brew install poppler   then rerun --layers san-diego")
@@ -183,8 +191,15 @@ def L_bva(root, cache, a):
         ([] if a.keep_cache else ["--delete-after"]))
 
 def L_case_law(root, cache, a):
-    run(["cap_to_okf.py", "--cache", os.path.join(cache, "cap"), "--out", root, "--scope", a.caselaw_scope] +
-        (["--keep-shards"] if a.keep_cache else []))
+    # CourtListener bulk data: superset of the Caselaw Access Project, current to the last quarter.
+    # Opinions (~55 GB compressed) are streamed, never stored, unless --keep-cache. Resumable.
+    run(["cl_to_okf.py", "--cache", os.path.join(cache, "courtlistener"), "--out", root,
+         "--scope", a.caselaw_scope, "--date", a.cl_date] + (["--keep"] if a.keep_cache else []))
+
+def L_case_law_cap(root, cache, a):
+    """Older alternative: Caselaw Access Project only (to 2018). Not in the default order."""
+    run(["cap_to_okf.py", "--cache", os.path.join(cache, "cap"), "--out", root,
+         "--scope", "all" if a.caselaw_scope == "all" else "ca,federal"] + (["--keep-shards"] if a.keep_cache else []))
 
 def L_eval(root, cache, a):
     dest = os.path.join(root, "eval", "legalbench")
@@ -209,7 +224,8 @@ def L_eval(root, cache, a):
 
 LAYERS = {"colorado": L_colorado, "states": L_states, "constitution": L_constitution, "usc": L_usc, "court-rules": L_court_rules, "cfr": L_cfr,
           "ca-codes": L_ca_codes, "san-diego": L_san_diego, "ca-manifest": L_ca_manifest, "fr": L_fr,
-          "agency": L_agency, "bva": L_bva, "case-law": L_case_law, "eval": L_eval}
+          "agency": L_agency, "bva": L_bva, "case-law": L_case_law, "case-law-cap": L_case_law_cap, "eval": L_eval,
+          "gap-states": L_gap_states}
 
 # ----------------------------------------------------------------------------- bundle root
 TITLES = {"federal": "Federal law", "california": "California", "case-law": "Case law",
@@ -267,7 +283,9 @@ def main():
     ap.add_argument("--layers", default="all")
     ap.add_argument("--force", default="", help="comma list of layers to rebuild even if done")
     ap.add_argument("--fr-from", type=int, default=2000)
-    ap.add_argument("--caselaw-scope", default="ca,federal", help="ca,federal | all")
+    ap.add_argument("--caselaw-scope", default="all",
+                    help="all | comma list of jurisdictions (federal,california,new-york,...,tribal)")
+    ap.add_argument("--cl-date", default="2026-09-30", help="CourtListener quarterly bulk snapshot date")
     ap.add_argument("--usc-release", default="119-120", help="OLRC release point, e.g. 119-120")
     ap.add_argument("--keep-cache", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
@@ -281,7 +299,7 @@ def main():
     state_p = os.path.join(root, "references", "build-state.json")
     state = json.load(open(state_p)) if os.path.exists(state_p) else {"done": {}}
     force = {x.strip() for x in a.force.split(",") if x.strip()}
-    todo = [l for l in ORDER if l in want and (l not in state["done"] or l in force or l in ("fr",))]
+    todo = [l for l in ORDER + ["case-law-cap"] if l in want and (l not in state["done"] or l in force or l in ("fr",))]
 
     need = sum(EST_GB[l] for l in todo if l not in state["done"] or l in force)
     peak = max([DL_GB.get(l, 0) for l in todo] or [0])

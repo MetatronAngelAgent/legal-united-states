@@ -17,7 +17,12 @@ python3 build_legal.py --layers usc,cfr          # or selected layers
 python3 okf_validate.py ~/legal                  # OKF conformance + link check
 ```
 
-Requirements: Python 3.9+ (stdlib only). Optional `pdftotext` (poppler) for the San Diego layer.
+Requirements: Python 3.9+. Mostly stdlib; `states` installs pyarrow and `gap-states` installs
+beautifulsoup4 + lxml on first use; `git` for `gap-states`. Optional `pdftotext` (poppler) for San Diego.
+
+**Case law is big.** `--caselaw-scope all` streams CourtListener's 55 GB opinions file and writes
+~12 million opinions (~200 GB on disk, ~1–2 days on a laptop; resumable). Put `--root` on a drive
+with room (not an iCloud-synced folder), or narrow it: `--caselaw-scope federal,california`.
 Set `LEGAL_US_CONTACT` (an email or URL) so source sites can identify you in the User-Agent:
 `export LEGAL_US_CONTACT=you@example.com`.
 
@@ -59,9 +64,10 @@ C.F.R. and California code section they cite (76% resolve to an exact section in
 | `ca-codes` | California Legislative Information (`pubinfo`) | Constitution + 29 codes, 162,526 sections | public domain |
 | `colorado` | Colorado OLLS official annual release (2026) | 35,392 sections + annotations | public domain |
 | `states` | Vaquill Open US Law v2026.09.1 (official-URL sourced) | 52 jurisdictions: 1.61M statute sections, 1.04M regulation sections, 104,540 AG opinions, 48,114 court rules, 11,418 constitutional provisions | text public domain; **compilation CC BY-NC 4.0** |
+| `gap-states` | Public.Resource.Org bulk releases, structured HTML by UniCourt ([GitHub](https://github.com/UniCourt)) | Arkansas (Nov 2020), Georgia (Nov 2022), Mississippi (Jul 2020), Tennessee (May 2021) statutes: 128,476 sections | public domain — **historical snapshots** |
 | `san-diego` | San Diego City Clerk | 6,012 sections | public domain |
 | `ca-manifest` | Census + code-publisher directories | all 482 CA cities + 58 counties → publisher | metadata |
-| `case-law` | Caselaw Access Project (Common Pile) | CA + federal by default; `--caselaw-scope all` for every state | public domain |
+| `case-law` | CourtListener quarterly bulk data (Free Law Project) — includes all of the Caselaw Access Project | every federal, state, territorial, tribal and military court, 1658–Sept 2026 (~12M opinions; `--caselaw-scope` to narrow) | public domain |
 | `agency` | Pile of Law | ~180k decisions/opinions/guidance, 18 bodies | docs public domain; **compilation CC BY-NC-SA 4.0** |
 | `bva` | Pile of Law | Board of Veterans' Appeals | as above |
 | `eval` | LegalBench | 162 legal-reasoning tasks | CC BY 4.0 |
@@ -71,18 +77,21 @@ Counts are from verification runs; see `docs/coverage.md` for validation results
 ## Coverage — honestly
 
 **Complete (official sources, commercial-clean):** federal statutes, regulations, court rules,
-Constitution, Federal Register; California and Colorado statutes; San Diego's municipal code.
+Constitution, Federal Register; California and Colorado statutes; San Diego's municipal code;
+case law for every U.S. court (builder; full output ~200 GB, see below).
 
 **Complete for research use (non-commercial):** every other state + DC + Puerto Rico — statutes
 (47 jurisdictions), constitutions, regulations (39), court rules (46) and attorney-general opinions
 (42) — via the `states` layer. Every record links to its official source URL. For commercial use,
 license from Vaquill or replace state by state with official-source builds (`docs/state-sources.md`).
 
-**Gaps:** statutes for Arkansas, Georgia, Mississippi and Tennessee (official text sits behind
-LexisNexis public-access portals or an exclusive publisher; available in Vaquill's CC BY v2026.07
-snapshot on Hugging Face, which requires accepting its access terms); regulations for 13 states
-(incl. TX, NY, NJ); California regulations (CCR) and most city codes (commercial-publisher terms —
-`docs/ca-municipal-manifest.csv` maps every CA city); case law after ~2018; agency decisions after 2022.
+**Out of date by design:** Arkansas, Georgia, Mississippi and Tennessee statutes. Their current
+official text is only on publisher portals that forbid bulk copying; the newest public-domain bulk
+releases are 2020–2022. Every concept says so (`currency`, `stale_after`, tag `historical-snapshot`).
+
+**Gaps:** regulations for 13 jurisdictions (AZ, CA, HI, IN, LA, MA, MO, NJ, NY, RI, TN, TX, VT);
+most city and county codes (commercial-publisher terms — `docs/ca-municipal-manifest.csv` maps every
+CA city); agency decisions after 2022. Full list in `docs/coverage.md`.
 
 **Not included here:** the retrieval layer itself (embedding index + MCP query server) — the
 corpus is prepared for it; see the roadmap in `docs/coverage.md`.
@@ -97,7 +106,7 @@ corpus is prepared for it; see the roadmap in `docs/coverage.md`.
 ## Repository layout
 
 ```
-tools/      build_legal.py (runner) + 13 converters + okf_validate.py
+tools/      build_legal.py (runner) + 15 converters + okf_validate.py
 samples/    real output: full Constitution and federal court rules, plus a few concepts per layer
 docs/       coverage & validation notes, CA municipal publisher manifest
 ```
